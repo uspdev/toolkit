@@ -22,7 +22,7 @@ Route::get('theme', function () {
     return view('theme');
 });
 
-Route::get('pessoa', [PessoaController::class, 'list']);
+Route::get('Pessoa', [PessoaController::class, 'list']);
 
 // No final
 Route::match(['get', 'post'], '{classe}/{metodo}',[PessoaController::class, 'show']);
