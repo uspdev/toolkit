@@ -1,4 +1,4 @@
-<table class="table table-stripped table-hover table-bordered datatable-custom no-footer">
+<table class="table table-stripped table-hover table-bordered resultado-multiarray no-footer">
   <thead>
     <tr>
       @foreach ($keys as $key)
@@ -19,3 +19,22 @@
     @endforeach
   </tbody>
 </table>
+
+@section('javascripts_bottom')
+  @parent
+  <script>
+    $(document).ready(function() {
+
+      oTable = $('.resultado-multiarray').DataTable({
+        dom: 't',
+        "paging": false,
+        "sort": true,
+        "order": [
+          [0, "asc"]
+        ]
+      })
+
+    })
+
+  </script>
+@endsection

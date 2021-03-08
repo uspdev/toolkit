@@ -20,7 +20,11 @@
   </div>
   <div class="card mt-2">
     <div class="card-header h4">
-      Resultado @include('partials.tipos')
+      <div class="form-inline">
+        Resultado @include('partials.tipos')
+        @includewhen($type == 'multi_array','partials.datatable-totalbox')
+        @includewhen($type == 'multi_array','partials.datatable-filterbox')
+      </div>
     </div>
     <div class="card-body">
       @if ($type == 'multi_array')
@@ -46,14 +50,8 @@
   {{-- @include('partials.params-js') --}}
   <script>
     $(document).ready(function() {
-      $('.datatable-custom').DataTable({
-        dom: 'fitp', // https://datatables.net/examples/basic_init/dom.html
-        paginate: false,
-        "buttons": [
-          'excelHtml5', 'csvHtml5'
-        ]
-      });
 
+      // Botão para mostrar o docblock
       $('.docblock_btn').click(function() {
         $('.docblock').slideToggle()
       })

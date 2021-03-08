@@ -49,6 +49,8 @@ class PessoaController extends Controller
             // vamos executar o método e guardar a saída
             $data = $className::$metodo(...$params);
 
+            //dd($data);
+
             // vamos avaliar o tipo da saída para renderizar corretamente na view
             if (is_array($data)) {
                 if (isset($data[0]) && is_array($data[0])) {

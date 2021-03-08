@@ -1,6 +1,7 @@
+@if($m->isPublic()) 
 <form class="form-inline" method="POST" action="Replicado/{{ $classe->getShortName() }}/{{ $m->getName() }}">
   @csrf
-  @foreach ($m->getParameters() as $p)
+  @forelse ($m->getParameters() as $p)
     @php
       $required = $p->isOptional() ? '' : 'required';
     @endphp
@@ -14,6 +15,11 @@
       placeholder="{{ $p->name }}" value=""
         {{ $required }}> @include('partials.param-default-value')
     </div>
-  @endforeach
-  <button class="btn btn-sm btn-light submit_btn">OK</button>
+    @empty
+<span class="badge badge-primary mx-2">Sem parâmetros</span>
+  @endforelse
+  <button class="btn submit_btn p-0"><i class="fas fa-lg fa-chevron-circle-right text-success"></i></button>
 </form>
+@else
+<span class="badge badge-warning ml-2">Método privado</span>
+@endif
