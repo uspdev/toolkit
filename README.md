@@ -15,7 +15,7 @@ Este é um projeto laravel e a configuração é similar a outros projetos que u
 
 ### Replicado
 
-O sistema irá procurar todas as classes no namespace Uspdev\replicado.  
+O sistema irá procurar todas as classes no namespace Uspdev\Replicado.  
 Em cada classe irá buscar os métodos, parâmetros e documentação (docblock).     
 O sistema permitirá chamar o método e mostrará o resultado correspondente.
 
