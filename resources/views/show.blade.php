@@ -7,7 +7,7 @@
     <div class="col-12">
       <div class="form-inline float-left">
         <span class="h4"><a href="Replicado/{{ $classe->getShortName() }}"> {{ $classe->getShortName() }}</a>
-          <i class="fas fa-angle-right"></i> {{ $metodo }}({{ implode(',', $params) }})</span>
+          <i class="fas fa-angle-right"></i> {{ $metodo }}({{ $paramString }})</span>
         @include('partials.params', ['m'=>$methodReflection])
       </div>
       <div class="float-right"><button class="btn btn-sm btn-primary docblock_btn">Docblock</button></div>
