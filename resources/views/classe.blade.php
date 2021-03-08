@@ -3,7 +3,7 @@
 @section('title') Sistema USP @endsection
 
 @section('content')
-  <h4>Pessoa</h4>
+  <h4><a href="">Home</a> > {{ $classe->getShortName() }}</h4>
 
   <table class="table table-stripped table-hover table-bordered datatable no-footer">
     <thead>

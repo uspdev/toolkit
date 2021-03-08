@@ -11,9 +11,11 @@
 
   <h4>Replicado</h4>
   <ul>
-    <li><a href="pessoa">Replicado::pessoa</a></li>
-    <li><a href="#">Replicado::Graduacao</a></li>
+  @foreach ($classes as $classe)
+    <li><a href="Replicado/{{ substr($classe, strrpos($classe, '\\') +1, strlen($classe)) }}">{{ $classe }}</a></li>
+    @endforeach
   </ul>
+
 
   <h4>Senhaunica fake</h4>
 

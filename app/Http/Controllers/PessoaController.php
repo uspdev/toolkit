@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Uspdev\Replicado\Pessoa;
+use HaydenPierce\ClassFinder\ClassFinder;
 
 class PessoaController extends Controller
 {
 
-    function list() {
-        $classe = new \ReflectionClass('Uspdev\Replicado\Pessoa');
-        return view('pessoa', compact('classe'));
+    public function listarClasses() {
+        $classes = ClassFinder::getClassesInNamespace('Uspdev\Replicado');
+        return view('index', compact('classes'));
+    }
+
+    public function listarMetodos($classe) {
+        $classe = new \ReflectionClass('Uspdev\\Replicado\\'.$classe);
+        return view('classe', compact('classe'));
     }
 
     public function show(Request $request, $classe, $metodo)
@@ -51,6 +57,7 @@ class PessoaController extends Controller
             }
         }
 
+        $classe = new \ReflectionClass('Uspdev\\Replicado\\'.$classe);
         $methodReflection = new \ReflectionMethod($className, $metodo);
         return view('show', compact('type', 'methodReflection', 'classe', 'metodo', 'data', 'params', 'keys'));
     }

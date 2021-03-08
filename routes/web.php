@@ -14,16 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [PessoaController::class, 'listarClasses']);
 
 Route::get('theme', function () {
     return view('theme');
 });
 
-Route::get('Pessoa', [PessoaController::class, 'list']);
+Route::get('Replicado/{classe}', [PessoaController::class, 'listarMetodos']);
 
 // No final
-Route::match(['get', 'post'], '{classe}/{metodo}',[PessoaController::class, 'show']);
+Route::match(['get', 'post'], 'Replicado/{classe}/{metodo}',[PessoaController::class, 'show']);
 

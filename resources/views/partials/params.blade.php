@@ -1,4 +1,4 @@
-<form class="form-inline" method="POST" action="Pessoa/{{ $m->getName() }}">
+<form class="form-inline" method="POST" action="Replicado/{{ $classe->getShortName() }}/{{ $m->getName() }}">
   @csrf
   @foreach ($m->getParameters() as $p)
     @php
@@ -11,8 +11,8 @@
         </div>
       @endif
       <input class="form-control" type="text" name="{{ $p->name }}" 
-      placeholder="{{ $p->name }}" value="@include('partials.param-default-value')"
-        {{ $required }}>
+      placeholder="{{ $p->name }}" value=""
+        {{ $required }}> @include('partials.param-default-value')
     </div>
   @endforeach
   <button class="btn btn-sm btn-light submit_btn">OK</button>
