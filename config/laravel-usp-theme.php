@@ -36,18 +36,16 @@ $submenu2 = [
 ];
 $menu = [
     [
-        'text' => '<i class="fas fa-home"></i> Item 1',
-        'url' => config('app.url') . '/item1',
+        'text' => '<i class="fas fa-home"></i> Theme',
+        'url' => 'theme',
     ],
     [
-        'text' => 'Item 2',
-        'url' => config('app.url') . '/item2',
-        'can' => '',
+        'text' => '<i class="fas fa-copy"></i> Replicado',
+        'url' => 'Replicado',
     ],
     [
-        'text' => 'Item 3',
-        'url' => config('app.url') . '/item3',
-        'can' => 'admin',
+        'text' => '<i class="fas fa-camera"></i> Wsfoto',
+        'url' => 'Wsfoto/obter',
     ],
     [
         'text' => 'SubMenu1',

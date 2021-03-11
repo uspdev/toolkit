@@ -15,12 +15,18 @@
   <h4>Replicado</h4>
   <ul>
     @foreach ($classes as $classe)
-      <li><a href="Replicado/{{ substr($classe, strrpos($classe, '\\') + 1, strlen($classe)) }}">{{ $classe }}</a>
+      <li>
+        <a href="Replicado/{{ substr($classe, strrpos($classe, '\\') + 1, strlen($classe)) }}">{{ $classe }}</a>
       </li>
     @endforeach
   </ul>
 
-  <h4>Senhaunica fake</h4>
+  <h4>Foto</h4>
+  <ul>
+    <li>
+      <a href="Wsfoto/obter">Uspdev\Wsfoto::obter</a>
+    </li>
+  </ul>
 
 
 @endsection

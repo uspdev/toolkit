@@ -1,4 +1,4 @@
-<span class="badge badge-pill badge-primary ml-2" id="oTable-total">10</span>
+<span class="badge badge-pill badge-primary ml-2" id="oTable-total">- carregando -</span>
 
 @section('javascripts_bottom')
   @parent

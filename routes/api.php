@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UspdevController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('{nameSpace}', [UspdevController::class, 'listarClasses']);
+Route::get('{nameSpace}/{classe}', [UspdevController::class, 'listarMetodos']);
+
+// No final
+Route::match(['get', 'post'], 'Replicado/{classe}/{metodo}',[UspdevController::class, 'show']);
