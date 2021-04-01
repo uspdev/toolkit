@@ -6,7 +6,7 @@
   <div class="card">
     <div class="card-header h4">
       <div class="form-inline">
-        <a href="">Home</a> > {{ $classe->getShortName() }}
+        <a href="">Home</a> <i class="fas fa-angle-right mx-1"></i> {{ $classe->getShortName() }}
         @include('partials.datatable-totalbox')
         @include('partials.datatable-filterbox')
       </div>
