@@ -41,3 +41,11 @@ A fazer.
 ### WSBoleto
 
 A Fazer.
+
+## Como contribuir
+
+Para adicionar uma nova biblioteca com métodos estáticos
+
+* adicionar no `composer.json` a biblioteca na versão `dev-master`
+* adicionar em `toolkit-projects.sh`
+* adicionar em `app\models\Library.php`
