@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d521a35b62423fd5b4ea22f466f60fd1",
+    "content-hash": "8c6d9d98a22f78642049d75f086f568f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4995,7 +4995,7 @@
         },
         {
             "name": "uspdev/utils",
-            "version": "1.0.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/utils.git",
@@ -5010,6 +5010,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^8.5 || ^9.0"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -7635,6 +7636,7 @@
     "stability-flags": {
         "uspdev/laravel-usp-theme": 20,
         "uspdev/replicado": 20,
+        "uspdev/utils": 20,
         "uspdev/wsfoto": 20
     },
     "prefer-stable": true,
