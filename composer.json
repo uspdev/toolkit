@@ -18,7 +18,7 @@
         "phpdocumentor/reflection-docblock": "^5.2",
         "uspdev/laravel-usp-theme": "dev-master",
         "uspdev/replicado": "dev-master",
-        "uspdev/utils": "^1.0",
+        "uspdev/utils": "dev-master",
         "uspdev/wsfoto": "dev-master"
     },
     "require-dev": {
