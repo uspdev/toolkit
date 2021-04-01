@@ -4995,16 +4995,16 @@
         },
         {
             "name": "uspdev/utils",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/utils.git",
-                "reference": "0bab82baa2d2bb0f19759f5867718f96d72ab900"
+                "reference": "3cb2c5734f5ac77867a389ab9eb808da105fd788"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/utils/zipball/0bab82baa2d2bb0f19759f5867718f96d72ab900",
-                "reference": "0bab82baa2d2bb0f19759f5867718f96d72ab900",
+                "url": "https://api.github.com/repos/uspdev/utils/zipball/3cb2c5734f5ac77867a389ab9eb808da105fd788",
+                "reference": "3cb2c5734f5ac77867a389ab9eb808da105fd788",
                 "shasum": ""
             },
             "require-dev": {
@@ -5013,7 +5013,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Uspdev\\": "src/"
+                    "Uspdev\\Utils\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5029,9 +5029,9 @@
             "description": "Diversos métodos estáticos em PHP para as coisas mais úteis ou inúteis...",
             "support": {
                 "issues": "https://github.com/uspdev/utils/issues",
-                "source": "https://github.com/uspdev/utils/tree/1.0.3"
+                "source": "https://github.com/uspdev/utils/tree/1.0.4"
             },
-            "time": "2021-03-31T03:36:47+00:00"
+            "time": "2021-04-01T15:11:11+00:00"
         },
         {
             "name": "uspdev/wsfoto",
