@@ -5,27 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use HaydenPierce\ClassFinder\ClassFinder;
 use Illuminate\Http\Request;
+use App\Models\Library;
 
-class ReplicadoController extends Controller
+class LibraryController extends Controller
 {
-    private static $baseNamespace = 'Uspdev\\Replicado\\';
-
-    public static function listarClasses($api=false)
+    public static function index($library)
     {
-        $classes = ClassFinder::getClassesInNamespace(SELF::$baseNamespace);
-        if ($api) {
-            return $classes;
-        }
-        return view('replicado.list', compact('classes'));
+        $classes = Library::listarClasses($library);       
+        return view('library.index', [
+            'classes' => $classes,
+            'library' => $library 
+        ]);
     }
 
-    public function listarMetodos($classe)
+    public function methods($library, $class)
     {
-        $classe = new \ReflectionClass(SELF::$baseNamespace . $classe);
-        return view('classe', compact('classe'));
+        $classe = Library::listarMetodos($library,$class);       
+        return view('library.methods', [
+            'classe' => $classe,
+            'library' => $library 
+        ]);
     }
 
-    public function show(Request $request, $classe, $metodo)
+    public function show(Request $request, $library, $class, $method)
     {
         $data = [];
         $paramString = '';
@@ -35,24 +37,32 @@ class ReplicadoController extends Controller
             $inputs = $request->all();
             unset($inputs['_token']);
             list($params, $paramString) = SELF::params($inputs);
-            $data = SELF::exec($classe, $metodo, $params);
+            $data = SELF::exec($library, $class, $method, $params);
             list($type, $keys) = SELF::tipoDados($data);
         }
 
-        $className = 'Uspdev\\Replicado\\' . $classe;
+        $className = "Uspdev\\{$library}\\" . $class;
         $classe = new \ReflectionClass($className);
-        $methodReflection = new \ReflectionMethod($className, $metodo);
-        $ns = 'Replicado';
+        $methodReflection = new \ReflectionMethod($className, $method);
+        $ns = $library;
 
-        return view('show', compact('type', 'methodReflection', 'classe', 'metodo', 'data', 'paramString', 'keys'));
+        return view('library.show', [
+            'type' => $type,
+            'methodReflection' => $methodReflection,
+            'classe' => $classe,
+            'metodo' => $method,
+            'data'   => $data,
+            'paramString' => $paramString,
+            'keys'        => $keys,
+            'library'     => $library
+        ]);
 
     }
 
-    public static function exec($classe, $metodo, $params)
+    public static function exec($library, $classe, $metodo, $params)
     {
-        $className = SELF::$baseNamespace . $classe;
-        $data = $className::$metodo(...$params);
-        return $data;
+        $className = 'Uspdev\\' . $library . '\\' . $classe;
+        return $className::$metodo(...$params);
     }
 
     public static function params($inputs)

@@ -1,5 +1,5 @@
 @if($m->isPublic()) 
-<form class="form-inline" method="POST" action="Replicado/{{ $classe->getShortName() }}/{{ $m->getName() }}">
+<form class="form-inline" method="POST" action="library/{{ $library }}/{{ $classe->getShortName() }}/{{ $m->getName() }}">
   @csrf
   @forelse ($m->getParameters() as $p)
     @php
