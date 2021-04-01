@@ -13,6 +13,10 @@ Este é um projeto laravel e a configuração é similar a outros projetos que u
 
 ## Funcionamento
 
+Os projetos alvo são clonados em `uspdev-projects` e linkados no `vendor/uspdev`.
+
+Dessa forma podemos ajustá-los e testá-los diretamente nesse toolkit. Ao final commite e atualize os repositórios. 
+
 ### Replicado
 
 O sistema irá procurar todas as classes no namespace Uspdev\Replicado.  
