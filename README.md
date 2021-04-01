@@ -1,4 +1,4 @@
-# Testes
+# Toolkit
 
 Sistema que permite testar algumas biblitecas do USPDev como o **replicado**, **laravel-usp-theme** e **senhaunica-fake**.
 
@@ -24,6 +24,16 @@ O sistema permitirá chamar o método e mostrará o resultado correspondente.
 
 O sistema tem uma view com a página de demo do theme.
 
-### Senhaunica-fake
+### WSFoto
+
+Permite consultar a foto correspondente.
+
+
+### Senha única / Senha única faker
 
 A fazer.
+
+
+### WSBoleto
+
+A Fazer.
