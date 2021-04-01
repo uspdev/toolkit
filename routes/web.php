@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\ReplicadoController;
 use App\Http\Controllers\WsfotoController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,10 +24,6 @@ Route::get('theme', function () {
 });
 
 Route::match(['get', 'post'], 'Wsfoto/obter',[WsfotoController::class, 'show']);
-
-Route::get('Replicado', [ReplicadoController::class, 'listarClasses']);
-Route::get('Replicado/{classe}', [ReplicadoController::class, 'listarMetodos']);
-Route::match(['get', 'post'], 'Replicado/{classe}/{metodo}',[ReplicadoController::class, 'show']);
 
 Route::get('library/{library}', [LibraryController::class, 'index']);
 Route::get('library/{library}/{class}', [LibraryController::class, 'methods']);
