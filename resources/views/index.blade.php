@@ -12,15 +12,6 @@
     <li><a href="theme">Theme</a></li>
   </ul>
 
-  <h4>Replicado</h4>
-  <ul>
-    @foreach ($classes as $classe)
-      <li>
-        <a href="Replicado/{{ substr($classe, strrpos($classe, '\\') + 1, strlen($classe)) }}">{{ $classe }}</a>
-      </li>
-    @endforeach
-  </ul>
-
   <h4>Foto</h4>
   <ul>
     <li>
@@ -28,14 +19,16 @@
     </li>
   </ul>
 
-  <h4>Utils</h4>
+  @foreach (\App\Models\Library::libs as $library)
+  <h4>{{ $library }} </h4>
   <ul>
-    @foreach ($classes as $classe)
+    @foreach ($classes[$library] as $classe)
       <li>
-        <a href="Replicado/{{ substr($classe, strrpos($classe, '\\') + 1, strlen($classe)) }}">{{ $classe }}</a>
+        <a href="library/{{$library}}/{{ substr($classe, strrpos($classe, '\\') + 1, strlen($classe)) }}">{{ $classe }}</a>
       </li>
     @endforeach
   </ul>
+  @endforeach
 
 
 @endsection

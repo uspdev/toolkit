@@ -45,7 +45,6 @@ class ReplicadoController extends Controller
         $ns = 'Replicado';
 
         return view('show', compact('type', 'methodReflection', 'classe', 'metodo', 'data', 'paramString', 'keys'));
-
     }
 
     public static function exec($classe, $metodo, $params)
