@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "316415e0c45c81950cca6f31fa239b8f",
+    "content-hash": "e27ac3b7d860fd762da57da6b9aa2f5b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4899,7 +4899,7 @@
         },
         {
             "name": "uspdev/laravel-usp-theme",
-            "version": "2.0.7",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/laravel-usp-theme.git",
@@ -4911,6 +4911,7 @@
                 "reference": "b33d845aaf490b3af9d808ca759083cf97974f3d",
                 "shasum": ""
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -4943,20 +4944,21 @@
         },
         {
             "name": "uspdev/replicado",
-            "version": "1.6.11",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/replicado.git",
-                "reference": "fb9b29e0a16c3fbbe535c8c159820795f8af1e56"
+                "reference": "be08b3faea96c3097dc68b9c211f4ffca7afb23e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/replicado/zipball/fb9b29e0a16c3fbbe535c8c159820795f8af1e56",
-                "reference": "fb9b29e0a16c3fbbe535c8c159820795f8af1e56",
+                "url": "https://api.github.com/repos/uspdev/replicado/zipball/be08b3faea96c3097dc68b9c211f4ffca7afb23e",
+                "reference": "be08b3faea96c3097dc68b9c211f4ffca7afb23e",
                 "shasum": ""
             },
             "require": {
                 "ext-pdo_dblib": "*",
+                "illuminate/support": "^5 || ^6 || ^7 || ^8",
                 "monolog/monolog": "^1.25 || ^2",
                 "php": ">=7.0",
                 "uspdev/cache": "^0.7.1"
@@ -4965,6 +4967,7 @@
                 "phpunit/phpunit": "^8.0 || ^9.0",
                 "vlucas/phpdotenv": "^5.2"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -4986,13 +4989,13 @@
             "homepage": "https://github.com/uspdev/replicado",
             "support": {
                 "issues": "https://github.com/uspdev/replicado/issues",
-                "source": "https://github.com/uspdev/replicado/tree/1.6.11"
+                "source": "https://github.com/uspdev/replicado/tree/1.7"
             },
-            "time": "2021-03-24T18:35:51+00:00"
+            "time": "2021-04-01T13:35:24+00:00"
         },
         {
             "name": "uspdev/wsfoto",
-            "version": "2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/wsfoto.git",
@@ -5004,6 +5007,7 @@
                 "reference": "dbe91e3f466b6a0ff84974944f88e45a9d08e5d2",
                 "shasum": ""
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -7588,7 +7592,11 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "uspdev/laravel-usp-theme": 20,
+        "uspdev/replicado": 20,
+        "uspdev/wsfoto": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

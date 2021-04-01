@@ -16,9 +16,9 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.2",
-        "uspdev/laravel-usp-theme": "^2.0",
-        "uspdev/replicado": "^1.6",
-        "uspdev/wsfoto": "^2.0"
+        "uspdev/laravel-usp-theme": "dev-master",
+        "uspdev/replicado": "dev-master",
+        "uspdev/wsfoto": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
