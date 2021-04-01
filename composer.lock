@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e27ac3b7d860fd762da57da6b9aa2f5b",
+    "content-hash": "d521a35b62423fd5b4ea22f466f60fd1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4992,6 +4992,46 @@
                 "source": "https://github.com/uspdev/replicado/tree/1.7"
             },
             "time": "2021-04-01T13:35:24+00:00"
+        },
+        {
+            "name": "uspdev/utils",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uspdev/utils.git",
+                "reference": "0bab82baa2d2bb0f19759f5867718f96d72ab900"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uspdev/utils/zipball/0bab82baa2d2bb0f19759f5867718f96d72ab900",
+                "reference": "0bab82baa2d2bb0f19759f5867718f96d72ab900",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Uspdev\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Gomes Veríssimo",
+                    "email": "verissimotgv@gmail.com"
+                }
+            ],
+            "description": "Diversos métodos estáticos em PHP para as coisas mais úteis ou inúteis...",
+            "support": {
+                "issues": "https://github.com/uspdev/utils/issues",
+                "source": "https://github.com/uspdev/utils/tree/1.0.3"
+            },
+            "time": "2021-03-31T03:36:47+00:00"
         },
         {
             "name": "uspdev/wsfoto",

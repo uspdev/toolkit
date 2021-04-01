@@ -1,7 +1,5 @@
 @extends('laravel-usp-theme::master')
 
-@section('title', 'Replicado')
-
 @section('content')
 
   <div class="card">

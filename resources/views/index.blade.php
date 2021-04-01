@@ -28,5 +28,14 @@
     </li>
   </ul>
 
+  <h4>Utils</h4>
+  <ul>
+    @foreach ($classes as $classe)
+      <li>
+        <a href="Replicado/{{ substr($classe, strrpos($classe, '\\') + 1, strlen($classe)) }}">{{ $classe }}</a>
+      </li>
+    @endforeach
+  </ul>
+
 
 @endsection

@@ -12,8 +12,8 @@ class MainController extends Controller
 
     public function index()
     {
-
-        $classes = ReplicadoController::listarClasses(true);
+        $classes = LibraryController::listarClasses('Replicado',true);
+        dd( $classes);
         return view('index', compact('classes'));
     }
 
