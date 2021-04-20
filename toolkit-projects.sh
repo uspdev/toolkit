@@ -25,6 +25,8 @@ clone_update "replicado"
 clone_update "laravel-usp-theme"
 clone_update "wsfoto"
 clone_update "utils"
+clone_update "cache"
+clone_update "senhaunica-socialite"
 
 echo ""
 echo "Projetos em Uspdev-projects linkados no vendor !!"

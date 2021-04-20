@@ -35,7 +35,7 @@ Permite consultar a foto correspondente.
 
 ### Senha única / Senha única faker
 
-A fazer.
+É necessário ter um BD para funcionar. Crie o BD e configure as credenciais no .env.
 
 
 ### WSBoleto
