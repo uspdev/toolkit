@@ -1,0 +1,1 @@
+<span class="badge badge-info">demorou {{ $execTime }} s</span>

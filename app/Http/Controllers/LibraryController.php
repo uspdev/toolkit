@@ -37,7 +37,9 @@ class LibraryController extends Controller
             $inputs = $request->all();
             unset($inputs['_token']);
             list($params, $paramString) = SELF::params($inputs);
+            $exectime = -microtime(true);
             $data = SELF::exec($library, $class, $method, $params);
+            $exectime += microtime(true);
             list($type, $keys) = SELF::tipoDados($data);
         }
 
@@ -54,18 +56,19 @@ class LibraryController extends Controller
             'data'   => $data,
             'paramString' => $paramString,
             'keys'        => $keys,
-            'library'     => $library
+            'library'     => $library,
+            'execTime'    => number_format($exectime,3),
         ]);
 
     }
 
-    public static function exec($library, $classe, $metodo, $params)
+    protected static function exec($library, $classe, $metodo, $params)
     {
         $className = 'Uspdev\\' . $library . '\\' . $classe;
         return $className::$metodo(...$params);
     }
 
-    public static function params($inputs)
+    protected static function params($inputs)
     {
         $params = [];
         $paramString = '';
