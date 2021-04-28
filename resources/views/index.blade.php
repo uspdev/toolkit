@@ -5,9 +5,21 @@
 @section('content')
 
 <h4>Laravel USP Theme</h4>
-
+<div>
+    <form method="POST" action="theme-skin-change" class="form-inline">
+        @csrf
+        <label class="mr-3">Skins disponíveis</label>
+        <select name="skin" class="form-control form-control-sm skin-select">
+            @foreach(config('laravel-usp-theme.available-skins') as $sk)
+            <option {{ (session('laravel-usp-theme.skin') == $sk or $skin == $sk) ? 'selected' : '' }}>{{ $sk }}</option>
+            @endforeach
+        </select>
+    </form>
+</div>
+<br>
 Visualize a página de demo incluída no theme. Há exemplos de uso do datatables, datepicker,
-select2 e mask. Ajuste o USP_THEME_SKIN para ver outros skins.
+select2 e mask.
+
 <ul>
     <li><a href="theme">Theme</a></li>
 </ul>
@@ -38,4 +50,17 @@ select2 e mask. Ajuste o USP_THEME_SKIN para ver outros skins.
 @endforeach
 
 
+@endsection
+
+@section('javascripts_bottom')
+<script>
+
+    // autosubmit para skin changer
+    $(document).ready(function() {
+        $('.skin-select').change(function() {
+            this.form.submit()
+        })
+    })
+
+</script>
 @endsection

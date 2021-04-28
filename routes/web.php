@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\WsfotoController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +20,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [LoginController::class, 'redirectToProvider']);
 Route::get('callback', [LoginController::class, 'handleProviderCallback']);
-Route::post('logout', [LoginController::class, 'logout']);
+Route::match(['get', 'post'], 'logout', [LoginController::class, 'logout']);
 
 Route::get('/', [MainController::class, 'index']);
 
 Route::get('theme', function () {
     return view('theme');
+});
+
+Route::post('theme-skin-change', function (Request $request) {
+    session()->put('laravel-usp-theme', ['skin' => $request->skin]);
+    return back();
 });
 
 Route::match(['get', 'post'], 'Wsfoto/obter', [WsfotoController::class, 'show']);
