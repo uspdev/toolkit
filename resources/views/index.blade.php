@@ -11,7 +11,9 @@
         <label class="mr-3">Skins disponíveis</label>
         <select name="skin" class="form-control form-control-sm skin-select">
             @foreach(config('laravel-usp-theme.available-skins') as $sk)
-            <option {{ (session('laravel-usp-theme.skin') == $sk or $skin == $sk) ? 'selected' : '' }}>{{ $sk }}</option>
+            <option value="{{ $sk }}" {{ (session('laravel-usp-theme.skin') == $sk or $skin == $sk) ? 'selected' : '' }}>
+                {{ $sk }} {{ config('laravel-usp-theme.skin') == $sk ? '(.env)' : ''}}
+            </option>
             @endforeach
         </select>
     </form>
@@ -54,7 +56,6 @@ select2 e mask.
 
 @section('javascripts_bottom')
 <script>
-
     // autosubmit para skin changer
     $(document).ready(function() {
         $('.skin-select').change(function() {
