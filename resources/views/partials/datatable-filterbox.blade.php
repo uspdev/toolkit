@@ -1,5 +1,5 @@
-<div class="input-group col-6 col-sm-4 col-md-2">
-<div class=""><i class="fas fa-filter mr-2 fa-xs"></i></div>
+<div class="input-group col-6 col-sm-4 col-md-2 ml-2">
+    <div class=""><i class="fas fa-filter mr-2 fa-xs"></i></div>
     <input class="form-control form-control-sm" type="text" id="dt-search" placeholder="Filtrar...">
     <div class="input-group-append">
         <button class="btn btn-sm btn-outline-secondary" id="dt-search-clear">
@@ -16,7 +16,7 @@
         $('#dt-search').focus();
 
         $('#dt-search').keyup(function() {
-            {{$otable ?? 'oTable'}}.search($(this).val()).draw();
+            oTable.search($(this).val()).draw();
         })
 
         $('#dt-search-clear').on('click', function() {
@@ -25,5 +25,6 @@
         })
 
     })
+
 </script>
 @endsection
