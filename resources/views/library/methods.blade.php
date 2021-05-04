@@ -18,8 +18,13 @@
     .tooltip-inner {
         max-width: 800px;
         color: #000;
-        background-color: #17a2b8;
+        background-color: #B2EBF2;
         border-radius: .25rem;
+        font-size: 15px;
+    }
+
+    .docblock_content {
+        background-color: #B2EBF2;
         font-size: 15px;
     }
 
@@ -56,7 +61,7 @@
                             </a>
                             @include('library.partials.params')
                         </div>
-                        <div class="docblock my-2 docblock_btn" style="display:none">
+                        <div class="docblock_div my-2" style="display:none">
                             @include('partials.docblock',['showall'=>true])
                         </div>
                     </td>
@@ -86,7 +91,7 @@
         // Botão para mostrar o docblock
         $('.docblock_btn').click(function(e) {
             e.preventDefault()
-            $(this).closest('td').find('.docblock').slideToggle()
+            $(this).closest('td').find('.docblock_div').slideToggle()
         })
 
         $('[data-toggle="tooltip"]').tooltip({

@@ -5,7 +5,7 @@ $docblock = $factory->create($comment);
 //$serializer = new \phpDocumentor\Reflection\DocBlock\Serializer();
 @endphp
 @if ($showall ?? false)
-  <div class="card bg-info text-white">
+  <div class="card docblock_content">
     <div class="card-body">
       <pre>{{ $comment }}</pre>
     </div>
