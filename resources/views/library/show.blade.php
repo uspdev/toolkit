@@ -6,8 +6,12 @@
 <div class="row">
     <div class="col-12">
         <div class="form-inline float-left">
-            <span class="h4"><a href="library/{{$library}}/{{ $classe->getShortName() }}"> {{ $classe->getShortName() }}</a>
-                <i class="fas fa-angle-right"></i> {{ $metodo }}({{ $paramString }})</span>
+            <span class="h4">
+                {{-- {{ $library }} <i class="fas fa-angle-right"></i> --}}
+                <a href="library/{{ $library }}/{{ $classe->getShortName() }}"> {{ $classe->getShortName() }}</a>
+                <i class="fas fa-angle-right"></i>
+                {{ $metodo }}({{ $paramString }})
+            </span>
             @include('library.partials.params', ['m'=>$methodReflection])
         </div>
         <div class="float-right"><button class="btn btn-sm btn-primary docblock_btn">Docblock</button></div>
