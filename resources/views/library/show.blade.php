@@ -2,19 +2,53 @@
 
 @section('title', $metodo)
 
+@section('styles')
+{{-- repetido do methods.blade.php
+seria legal juntar e dar include --}}
+<style>
+    a.nostyle:link {
+        text-decoration: inherit;
+        color: inherit;
+    }
+
+    a.nostyle:visited {
+        text-decoration: inherit;
+        color: inherit;
+    }
+
+    /* https://stackoverflow.com/questions/14596743/how-do-you-change-the-width-and-height-of-twitter-bootstraps-tooltips */
+    .tooltip-inner {
+        max-width: 800px;
+        color: #000;
+        background-color: #B2EBF2;
+        border-radius: .25rem;
+        font-size: 15px;
+    }
+
+    .docblock_content {
+        background-color: #B2EBF2;
+        font-size: 15px;
+    }
+
+</style>
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-12">
         <div class="form-inline float-left">
             <span class="h4">
-                {{-- {{ $library }} <i class="fas fa-angle-right"></i> --}}
                 <a href="library/{{ $library }}/{{ $classe->getShortName() }}"> {{ $classe->getShortName() }}</a>
                 <i class="fas fa-angle-right"></i>
-                {{ $metodo }}({{ $paramString }})
+
+                <a href="#" class="docblock_btn nostyle" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock', ['m'=>$methodReflection])">
+                    {{ $metodo }}
+                </a>
+
+                ({{ $paramString }})
             </span>
             @include('library.partials.params', ['m'=>$methodReflection])
         </div>
-        <div class="float-right"><button class="btn btn-sm btn-primary docblock_btn">Docblock</button></div>
     </div>
 </div>
 <div>
@@ -57,8 +91,15 @@
     $(document).ready(function() {
 
         // Botão para mostrar o docblock
-        $('.docblock_btn').click(function() {
+        $('.docblock_btn').click(function(e) {
+            e.preventDefault()
             $('.docblock').slideToggle()
+        })
+
+        // tooltip
+        $('[data-toggle="tooltip"]').tooltip({
+            html: true
+            , boundary: 'window'
         })
 
     });
