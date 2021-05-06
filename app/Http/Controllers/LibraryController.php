@@ -33,6 +33,7 @@ class LibraryController extends Controller
         $paramString = '';
         $keys = [];
         $type = '';
+        $exectime = 0;
         if ($request->isMethod('post')) {
             $inputs = $request->all();
             unset($inputs['_token']);
