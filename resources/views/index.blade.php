@@ -24,6 +24,9 @@ select2 e mask.
     <li><a href="theme">Theme</a></li>
 </ul>
 
+O Theme, em conjunto com a senha unica e permisssion pode mostrar menus de acordo com os gates pré-definidos: user, gerente e admin.<br>
+<br>
+
 <h4>Senha única</h4>
 
 <ul>
