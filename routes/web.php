@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('login', [LoginController::class, 'redirectToProvider']);
-Route::get('callback', [LoginController::class, 'handleProviderCallback']);
-Route::match(['get', 'post'], 'logout', [LoginController::class, 'logout']);
-
 Route::get('/', [MainController::class, 'index']);
 
 Route::get('theme', function () {
