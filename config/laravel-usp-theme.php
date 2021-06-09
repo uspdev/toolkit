@@ -1,33 +1,78 @@
 <?php
 
-$right_menu = [
+$admin = [
     [
-        'text' => '<i class="fas fa-cog"></i>',
-        'title' => 'Configurações',
-        'url' => '',
+        'text' => '<i class="fas fa-atom"></i>  SubItem 1',
+        'url' => 'subitem1',
+    ],
+    [
+        'text' => 'SubItem 2',
+        'url' =>  '/subitem2',
+        'can' => 'admin',
+    ],
+    [
+        'type' => 'divider',
+    ],
+    [
+        'type' => 'header',
+        'text' => 'Cabeçalho',
+    ],
+    [
+        'text' => 'SubItem 3',
+        'url' => 'subitem3',
     ],
 ];
 
+$submenu2 = [
+    [
+        'text' => 'SubItem 1',
+        'url' => 'subitem1',
+    ],
+    [
+        'text' => 'SubItem 2',
+        'url' => 'subitem2',
+        'can' => 'admin',
+    ],
+];
 $menu = [
     [
+        'text' => '<i class="fas fa-home"></i> Home',
+        'url' => 'home',
+    ],
+    [
+        'text' => 'Drop Down',
+        'submenu' => $submenu2,
+        'can' => '',
+    ],
+    [
         'text' => 'Está logado',
-        'url' => '',
+        'url' => config('app.url') . '/logado', // com caminho absoluto
         'can' => 'user',
     ],
     [
-        'text' => 'É gerente',
-        'url' => '',
+        'text' => 'Menu gerente',
+        'url' => 'gerente',
         'can' => 'gerente',
     ],
     [
-        'text' => 'É admin',
-        'url' => '',
+        'text' => 'Menu admin',
+        'submenu' => $admin,
         'can' => 'admin',
     ],
 ];
 
+$right_menu = [
+    [
+        'text' => '<i class="fas fa-cog"></i>',
+        'title' => 'Configurações',
+        'target' => '_blank',
+        'url' => config('app.url') . '/item1',
+        'align' => 'right',
+    ],
+];
+
 # dashboard_url renomeado para app_url
-# USPTHEME_SKIN deve ser colocado no .env da aplicação
+# USP_THEME_SKIN deve ser colocado no .env da aplicação 
 
 return [
     'title' => config('app.name'),
