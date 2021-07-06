@@ -1,6 +1,6 @@
 @extends('laravel-usp-theme::master')
 
-@section('title', $metodo)
+@section('title', $metodo . ' | '. $library)
 
 @section('styles')
 {{-- repetido do methods.blade.php
@@ -40,11 +40,10 @@ seria legal juntar e dar include --}}
             <span class="h4">
                 <a href="library/{{ $library }}/{{ $classe->getShortName() }}"> {{ $classe->getShortName() }}</a>
                 <i class="fas fa-angle-right"></i>
-
-                <a href="#" class="docblock_btn nostyle" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock', ['m'=>$methodReflection])">
-                    {{ $metodo }}
+                <a href="#" class="nostyle" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock', ['m'=>$methodReflection])">
+                    {{ $metodo }} 
                 </a>
-
+                <button class="badge badge-info badge-pill docblock_btn">doc <i class="fas fa-caret-down"></i></button>
                 ({{ $paramString }})
             </span>
             @include('library.partials.params', ['m'=>$methodReflection])

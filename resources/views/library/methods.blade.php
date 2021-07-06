@@ -51,14 +51,13 @@
             <tbody>
                 @foreach ($classe->getMethods() as $m)
                 <tr>
-                    <td>
+                    <td data-sort="{{ $m->getName() }}">
                         <div class="form-inline">
-                            {{-- vamos ajudar o datatables a ordenar --}}
-                            <span style="display:none">{{ $m->getName() }}</span>
+                            <button class="badge badge-info badge-pill docblock_btn mr-2">doc <i class="fas fa-caret-down"></i></button>
 
-                            <a href="#" class="docblock_btn nostyle" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock')">
+                            <span class="nostyle" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock')">
                                 {{ $m->getName() }}
-                            </a>
+                            </span>
                             @include('library.partials.params')
                         </div>
                         <div class="docblock_div my-2" style="display:none">
