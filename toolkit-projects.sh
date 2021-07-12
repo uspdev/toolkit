@@ -12,6 +12,7 @@ clone_update() {
     echo -n "$DST.. "
     if [[ -d $DST ]]; then
         cd $DST
+        git checkout master
         git pull
         cd $BASE_DIR
     else

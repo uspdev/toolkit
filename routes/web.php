@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\WsfotoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +24,13 @@ Route::get('theme', function () {
     return view('theme');
 });
 
-Route::post('theme-skin-change', function (Request $request) {
-    session()->put('laravel-usp-theme', ['skin' => $request->skin]);
+Route::get('theme-skin-change', function (Request $request) {
+    $request->validate([
+        'skin' => ['required:',
+            Rule::in(config('laravel-usp-theme.available-skins'))],
+    ]);
+
+    \UspTheme::setSkin($request->skin);
     return back();
 });
 

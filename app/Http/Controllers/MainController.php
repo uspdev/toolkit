@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Library;
-
 class MainController extends Controller
 {
 
@@ -13,13 +11,32 @@ class MainController extends Controller
 
     public function index()
     {
-        $classes = []; 
-        foreach(Library::libs as $library){
+        $replicado = [
+            'text' => 'Replicado',
+            'url' => 'replicado',
+            'submenu' => [
+                [
+                    'text' => 'submenu1',
+                    'url' => 'submenu',
+                ],
+                [
+                    'text' => 'submenu2',
+                    'url' => '',
+                ],
+            ],
+        ];
+        \UspTheme::activeUrl('replicado');
+        \UspTheme::addMenu('replicado', $replicado);
+
+
+
+        $classes = [];
+        foreach (Library::libs as $library) {
             $classes[$library] = Library::listarClasses($library);
         }
         return view('index', [
             'libs' => Library::libs,
-            'classes' => $classes
+            'classes' => $classes,
         ]);
     }
 
