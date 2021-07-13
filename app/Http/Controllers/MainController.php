@@ -37,6 +37,7 @@ class MainController extends Controller
         return view('index', [
             'libs' => Library::libs,
             'classes' => $classes,
+            'user' => \Auth()->user(),
         ]);
     }
 
