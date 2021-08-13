@@ -61,7 +61,7 @@ seria legal juntar e dar include --}}
             Resultado @include('partials.tipos')
             @includewhen($type == 'multi_array','partials.datatable-totalbox')
             @includewhen($type == 'multi_array','partials.datatable-filterbox')
-            @includewhen(!empty($exectime),'partials.exectime')
+            @include('partials.exectime')
         </div>
     </div>
     <div class="card-body">
