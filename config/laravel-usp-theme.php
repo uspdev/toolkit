@@ -70,6 +70,9 @@ $right_menu = [
         'key' => 'theme',
     ],
     [
+        'key' => 'senhaunica-socialite'
+    ],
+    [
         'text' => '<i class="fas fa-cog"></i>',
         'title' => 'Configurações',
         'target' => '_blank',
