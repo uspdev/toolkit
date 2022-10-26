@@ -1,5 +1,5 @@
 {
-    "name": "laravel/laravel",
+    "name": "uspdev/toolkit",
     "type": "project",
     "description": "The Laravel Framework.",
     "keywords": [
@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.4|^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -16,12 +16,39 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.2",
+        "uspdev/laravel-tools": "dev-main",
         "uspdev/laravel-usp-theme": "dev-master",
         "uspdev/replicado": "dev-master",
-        "uspdev/senhaunica-socialite": "*",
+        "uspdev/senhaunica-socialite": "dev-master",
         "uspdev/utils": "dev-master",
         "uspdev/wsfoto": "dev-master"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "uspdev/laravel-tools"
+        },
+        {
+            "type": "path",
+            "url": "uspdev/laravel-usp-theme"
+        },
+        {
+            "type": "path",
+            "url": "uspdev/replicado"
+        },
+        {
+            "type": "path",
+            "url": "uspdev/senhaunica-socialite"
+        },
+        {
+            "type": "path",
+            "url": "uspdev/utils"
+        },
+        {
+            "type": "path",
+            "url": "uspdev/wsfoto"
+        }
+    ],
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
@@ -55,8 +82,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "pre-autoload-dump": [
-        ],
+        "pre-autoload-dump": [],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
