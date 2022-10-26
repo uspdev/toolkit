@@ -4,7 +4,7 @@
 
 BASE_DIR=$PWD
 ORG="uspdev"
-DST_DIR="uspdev-projects"
+DST_DIR="uspdev"
 
 clone_update() {
     local SRC=$ORG/$1
@@ -18,8 +18,6 @@ clone_update() {
     else
         git clone git@github.com:$SRC $DST
     fi
-    # rm -rf vendor/$SRC
-    # ln -s $PWD/$DST vendor/$SRC
 }
 
 clone_update "cache"
@@ -31,4 +29,4 @@ clone_update "utils"
 clone_update "wsfoto"
 
 echo ""
-echo "Projetos em Uspdev-projects atualizados !!"
+echo "Projetos em uspdev/ atualizados !!"
