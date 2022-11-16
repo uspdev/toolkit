@@ -11,10 +11,10 @@ class Library extends Model
         'Replicado',
         'Utils'
     ];
-    
+
     public static function listarClasses($library)
     {
-        $baseNamespace = "Uspdev\\{$library}\\";
+        $baseNamespace = "\\Uspdev\\{$library}\\";
         return ClassFinder::getClassesInNamespace($baseNamespace);
     }
 
