@@ -17,25 +17,18 @@ use Illuminate\Validation\Rule;
 | contains the "web" middleware group. Now create something great!
 |
  */
-
+$baseurl = parse_url(config('app.url'), PHP_URL_PATH);
+// dd($baseurl);
+// Route::get(parse_url(config('app.url'), PHP_URL_PATH), [MainController::class, 'index']);
 Route::get('/', [MainController::class, 'index']);
 
-Route::get('theme', function () {
-    return view('theme');
-});
-
-Route::get('theme-skin-change', function (Request $request) {
-    $request->validate([
-        'skin' => ['required:',
-            Rule::in(config('laravel-usp-theme.available-skins'))],
-    ]);
-
-    \UspTheme::setSkin($request->skin);
-    return back();
-});
+Route::get('theme', [MainController::class, 'theme']);
+Route::get('theme-skin-change', [MainController::class, 'themeSkinChange']);
+Route::post('senha-de-app', [MainController::class, 'senhaDeApp']);
 
 Route::match(['get', 'post'], 'Wsfoto/obter', [WsfotoController::class, 'show']);
 
 Route::get('library/{library}', [LibraryController::class, 'index']);
 Route::get('library/{library}/{class}', [LibraryController::class, 'methods']);
 Route::match(['get', 'post'], 'library/{library}/{class}/{method}', [LibraryController::class, 'show']);
+
