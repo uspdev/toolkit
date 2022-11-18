@@ -19,8 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('{nameSpace}', [UspdevController::class, 'listarClasses']);
-Route::get('{nameSpace}/{classe}', [UspdevController::class, 'listarMetodos']);
+// Route::get('{nameSpace}', [UspdevController::class, 'listarClasses']);
+// Route::get('{nameSpace}/{classe}', [UspdevController::class, 'listarMetodos']);
 
-// No final
-Route::match(['get', 'post'], 'Replicado/{classe}/{metodo}',[UspdevController::class, 'show']);
+// Route::match(['get', 'post'], 'Replicado/{classe}/{metodo}',[UspdevController::class, 'show']);
