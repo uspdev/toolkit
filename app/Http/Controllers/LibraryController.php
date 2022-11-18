@@ -3,27 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use HaydenPierce\ClassFinder\ClassFinder;
-use Illuminate\Http\Request;
 use App\Models\Library;
+use Illuminate\Http\Request;
 
 class LibraryController extends Controller
 {
     public static function index($library)
     {
-        $classes = Library::listarClasses($library);       
+        $classes = Library::listarClasses($library);
         return view('library.index', [
             'classes' => $classes,
-            'library' => $library 
+            'library' => $library,
         ]);
     }
 
     public function methods($library, $class)
     {
-        $classe = Library::listarMetodos($library,$class);       
+        $classe = Library::listarMetodos($library, $class);
         return view('library.methods', [
             'classe' => $classe,
-            'library' => $library 
+            'library' => $library,
         ]);
     }
 
@@ -54,11 +53,11 @@ class LibraryController extends Controller
             'methodReflection' => $methodReflection,
             'classe' => $classe,
             'metodo' => $method,
-            'data'   => $data,
+            'data' => $data,
             'paramString' => $paramString,
-            'keys'        => $keys,
-            'library'     => $library,
-            'execTime'    => number_format($exectime,3),
+            'keys' => $keys,
+            'library' => $library,
+            'execTime' => number_format($exectime, 3),
         ]);
 
     }
@@ -66,22 +65,30 @@ class LibraryController extends Controller
     protected static function exec($library, $classe, $metodo, $params)
     {
         $className = 'Uspdev\\' . $library . '\\' . $classe;
+        // dd($className,$metodo,$params);
+        // $r = \Uspdev\Replicado\Graduacao::listarDisciplinasAluno(12544097,1);
+        // dd($r);
         return $className::$metodo(...$params);
     }
 
+    /**
+     * Pega os inputs do form e transforma em params e paramsString prontos para a query
+     */
     protected static function params($inputs)
     {
+        //dd($inputs);
         $params = [];
         $paramString = '';
         foreach ($inputs as $v) {
-            if ($v !== NUll) {
+            if ($v !== null) {
+                $v_array = json_decode($v, true);
                 if (is_numeric($v) || $v === '0') { // é um número, nesse caso sempre inteiro
                     $paramString .= $v . ', ';
                     $v = intval($v);
-                } elseif (substr($v, 0, 1) == '[') { // é um array
-                    $paramString .= $v . ', ';
-                    # se [teste] dá erro, pois deveria ser ["teste"] !!!!!
-                    $v = json_decode("{$v}", true);
+                } elseif (json_last_error() === JSON_ERROR_NONE) { // é um json valido
+                    $v = $v_array;
+                    //dd($v);
+                    // dd(json_encode(["nomabvset"=>"SET"]));
                 } else {
                     $paramString .= $v . ', ';
                 }
