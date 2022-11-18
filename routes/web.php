@@ -17,9 +17,11 @@ use Illuminate\Validation\Rule;
 | contains the "web" middleware group. Now create something great!
 |
  */
-$baseurl = parse_url(config('app.url'), PHP_URL_PATH);
-// dd($baseurl);
-// Route::get(parse_url(config('app.url'), PHP_URL_PATH), [MainController::class, 'index']);
+
+// Esta rota permite utilizar php artisan route:cache sem dar problema na página principal.
+// Porém adiciona um detalhe de recursividade
+Route::get(parse_url(config('app.url'), PHP_URL_PATH), [MainController::class, 'index']);
+
 Route::get('/', [MainController::class, 'index']);
 
 Route::get('theme', [MainController::class, 'theme']);
