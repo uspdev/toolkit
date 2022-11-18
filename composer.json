@@ -12,13 +12,13 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "haydenpierce/class-finder": "^0.4.3",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.2",
         "uspdev/laravel-tools": "dev-main",
         "uspdev/laravel-usp-theme": "dev-master",
-        "uspdev/replicado": "dev-master",
+        "uspdev/laravel-replicado": "dev-main",
+        "uspdev/replicado": "dev-v2_alpha",
         "uspdev/senhaunica-socialite": "dev-master",
         "uspdev/utils": "dev-master",
         "uspdev/wsfoto": "dev-master"
@@ -31,6 +31,10 @@
         {
             "type": "path",
             "url": "uspdev/laravel-usp-theme"
+        },
+        {
+            "type": "path",
+            "url": "uspdev/laravel-replicado"
         },
         {
             "type": "path",
