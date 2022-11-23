@@ -19,9 +19,9 @@ class LibraryController extends Controller
 
     public function methods($library, $class)
     {
-        $classe = Library::listarMetodos($library, $class);
         return view('library.methods', [
-            'classe' => $classe,
+            'classReflection' => Library::listarMetodos($library, $class),
+            'class' => $class,
             'library' => $library,
         ]);
     }
@@ -44,14 +44,13 @@ class LibraryController extends Controller
         }
 
         $className = "Uspdev\\{$library}\\" . $class;
-        $classe = new \ReflectionClass($className);
         $methodReflection = new \ReflectionMethod($className, $method);
         $ns = $library;
 
         return view('library.show', [
             'type' => $type,
             'methodReflection' => $methodReflection,
-            'classe' => $classe,
+            'class' => $class,
             'metodo' => $method,
             'data' => $data,
             'paramString' => $paramString,

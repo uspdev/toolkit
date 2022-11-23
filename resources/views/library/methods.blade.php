@@ -35,8 +35,7 @@
 <div class="card">
     <div class="card-header h4">
         <div class="form-inline">
-            {{ $library }} <i class="fas fa-angle-right mx-1"></i>
-            {{ $classe->getShortName() }}
+            {{ $library }} <i class="fas fa-angle-right mx-1"></i> {{ $class }}
             @include('partials.datatable-totalbox')
             @include('partials.datatable-filterbox')
         </div>
@@ -49,7 +48,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($classe->getMethods() as $m)
+                @foreach ($classReflection->getMethods() as $m)
                 <tr>
                     <td data-sort="{{ $m->getName() }}">
                         <div class="form-inline">

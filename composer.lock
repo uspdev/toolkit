@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3ceb5eee2b24754bd51d567d290a44a",
+    "content-hash": "fde46cf133d04cd9d92e67e4567423de",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6130,7 +6130,7 @@
             "dist": {
                 "type": "path",
                 "url": "uspdev/laravel-tools",
-                "reference": "992087084542ee93265fd3d8bb052a4707387078"
+                "reference": "2ced93aaf254d7cb50aa5c1377730b427d3635c4"
             },
             "require": {
                 "php": "^7.3"
@@ -6208,11 +6208,11 @@
         },
         {
             "name": "uspdev/replicado",
-            "version": "dev-v2_alpha",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "uspdev/replicado",
-                "reference": "b1f4cb0b0c87e89f88f74fe3f8f2700f5584e658"
+                "reference": "d41ec8fd6e6c55a11de856f18f69c53bbfcbdee1"
             },
             "require": {
                 "ext-pdo_dblib": "*",
@@ -7042,16 +7042,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.16.2",
+            "version": "v1.16.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "7d1ed5f856ec8b9708712e3fc0708fcabe114659"
+                "reference": "0dbee8802e17911afbe29a8506316343829b056e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/7d1ed5f856ec8b9708712e3fc0708fcabe114659",
-                "reference": "7d1ed5f856ec8b9708712e3fc0708fcabe114659",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/0dbee8802e17911afbe29a8506316343829b056e",
+                "reference": "0dbee8802e17911afbe29a8506316343829b056e",
                 "shasum": ""
             },
             "require": {
@@ -7098,7 +7098,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2022-09-28T13:13:22+00:00"
+            "time": "2022-11-21T16:19:18+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -8878,7 +8878,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4|^8.0"
+        "php": "^7.4|^8.0|^8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

@@ -7,13 +7,14 @@ Sistema que permite testar algumas biblitecas do USPDev como o **replicado**, **
 Este é um projeto laravel e a configuração é similar a outros projetos que usam o framework.
 
 * Faça o clone
+* rode clone-projects.sh
 * composer install
 * copie e configure o .env
 * rode a aplicação
 
 ## Funcionamento
 
-Os projetos alvo são clonados em `uspdev-projects` e linkados no `vendor/uspdev`.
+Os projetos alvo são clonados em `uspdev` e, via composer, são linkados no `vendor/uspdev`.
 
 Dessa forma podemos ajustá-los e testá-los diretamente nesse toolkit. Ao final commite e atualize os repositórios. 
 
