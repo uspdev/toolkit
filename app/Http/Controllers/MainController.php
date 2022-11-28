@@ -15,8 +15,7 @@ class MainController extends Controller
 
     public function index()
     {
-        $replicado =
-            [
+        $replicado = [
             [
                 'text' => 'Replicado',
                 'url' => 'replicado',

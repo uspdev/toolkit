@@ -76,6 +76,9 @@ $right_menu = [
         'key' => 'senhaunica-socialite',
     ],
     [
+        'key' => 'laravel-tools',
+    ],
+    [
         'text' => '<i class="fas fa-cog"></i>',
         'title' => 'Configurações',
         'target' => '_blank',
