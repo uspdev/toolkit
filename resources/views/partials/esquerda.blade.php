@@ -56,30 +56,6 @@
   </div>
 </div>
 <br>
-<h4>
-  Laravel-tools
-  <small>({{ appVersion(['gitPath' => './../uspdev/laravel-tools/.git']) }})</small>
-</h4>
-<ul>
-  <li>
-    linkify(): de <b>Teste de link http://link.me</b> para <b>{!! linkify('Teste de link http://link.me') !!}</b>
-  </li>
-  <li>
-    hasReplicado(): {{ hasReplicado(true) }}
-  </li>
-  <li>
-    hasUspTheme(): {{ hasUspTheme(true) }}
-  </li>
-  <li>
-    appVersion(): {{ appVersion() }}
-  </li>
-  <li>
-    config laravel-tools.debug: <b>{{ config('laravel-tools.debug') ? 'true' : 'false' }}</b>
-  </li>
-  <li>
-    config laravel-tools.forcarHttps: <b>{{ config('laravel-tools.forcarHttps') ? 'true' : 'false' }}</b>
-  </li>
-</ul>
 
 <h4>
   Senha de APP Google
