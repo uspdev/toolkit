@@ -3,13 +3,16 @@
 # e linkar na pasta vendor/uspdev
 
 BASE_DIR=$PWD
-ORG="uspdev"
 DST_DIR="uspdev"
 
+RED='\033[0;34m'
+NC='\033[0m' # No Color
+
 clone_update() {
-    local SRC=$ORG/$1
+    local SRC=uspdev/$1
     local DST=$DST_DIR/$1
-    echo -n "$DST.. "
+    printf "${RED} $DST ..${NC}\n"
+
     if [[ -d $DST ]]; then
         cd $DST
         git checkout master || git checkout main
@@ -23,6 +26,7 @@ clone_update() {
 clone_update "cache"
 clone_update "laravel-tools"
 clone_update "laravel-usp-theme"
+clone_update "laravel-replicado"
 clone_update "replicado"
 clone_update "senhaunica-socialite"
 clone_update "utils"

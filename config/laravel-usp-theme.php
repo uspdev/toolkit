@@ -105,6 +105,9 @@ return [
     # na versão 1 era dashboard_url
     'app_url' => config('app.url'),
 
+    # container ou container-fluid
+    'container' => 'container-fluid',
+
     # login e logout
     'logout_method' => 'POST',
     'logout_url' => 'logout',
