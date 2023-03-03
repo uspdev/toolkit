@@ -34,7 +34,7 @@
         "paging": false,
         "sort": true,
         "order": [
-          [0, "asc"]
+        //   [100, "asc"]
         ],
         buttons: [
           'excelHtml5', 'csvHtml5'
