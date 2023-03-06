@@ -27,6 +27,7 @@ clone_update "replicado"
 clone_update "senhaunica-socialite"
 clone_update "utils"
 clone_update "wsfoto"
+clone_update "laravel-replicado"
 
 echo ""
 echo "Projetos em uspdev/ atualizados !!"
