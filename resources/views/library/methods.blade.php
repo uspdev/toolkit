@@ -1,103 +1,106 @@
 @extends('laravel-usp-theme::master')
 
-@section('title') Sistema USP @endsection
+@section('title')
+  Sistema USP
+@endsection
 
 @section('styles')
-<style>
+  <style>
     a.nostyle:link {
-        text-decoration: inherit;
-        color: inherit;
+      text-decoration: inherit;
+      color: inherit;
     }
 
     a.nostyle:visited {
-        text-decoration: inherit;
-        color: inherit;
+      text-decoration: inherit;
+      color: inherit;
     }
 
     /* https://stackoverflow.com/questions/14596743/how-do-you-change-the-width-and-height-of-twitter-bootstraps-tooltips */
     .tooltip-inner {
-        max-width: 800px;
-        color: #000;
-        background-color: #B2EBF2;
-        border-radius: .25rem;
-        font-size: 15px;
+      max-width: 800px;
+      color: #000;
+      background-color: #B2EBF2;
+      border-radius: .25rem;
+      font-size: 15px;
     }
 
     .docblock_content {
-        background-color: #B2EBF2;
-        font-size: 15px;
+      background-color: #B2EBF2;
+      font-size: 15px;
     }
-
-</style>
+  </style>
 @endsection
 
 @section('content')
-<div class="card">
+  <div class="card">
     <div class="card-header h4">
-        <div class="form-inline">
-            {{ $library }} <i class="fas fa-angle-right mx-1"></i> {{ $class }}
-            @include('partials.datatable-totalbox')
-            @include('partials.datatable-filterbox')
-        </div>
+      <div class="form-inline">
+        {{ $library }} <i class="fas fa-angle-right mx-1"></i> {{ $class }}
+        @include('partials.datatable-totalbox')
+        @include('partials.datatable-filterbox')
+      </div>
     </div>
     <div class="card-body">
-        <table class="table table-stripped table-hover table-bordered listar-metodos no-footer">
-            <thead>
-                <tr>
-                    <th>Método</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($classReflection->getMethods() as $m)
-                <tr>
-                    <td data-sort="{{ $m->getName() }}">
-                        <div class="form-inline">
-                            <button class="badge badge-info badge-pill docblock_btn mr-2">doc <i class="fas fa-caret-down"></i></button>
+      <table class="table table-stripped table-hover table-bordered listar-metodos no-footer">
+        <thead>
+          <tr>
+            <th>Método</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($classReflection->getMethods() as $m)
+            <tr>
+              <td data-sort="{{ $m->getName() }}">
+                <div class="form-inline">
+                  <button class="badge badge-info badge-pill docblock_btn mr-2">doc <i
+                      class="fas fa-caret-down"></i></button>
 
-                            <span class="nostyle" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock')">
-                                {{ $m->getName() }}
-                            </span>
-                            @include('library.partials.params')
-                        </div>
-                        <div class="docblock_div my-2" style="display:none">
-                            @include('partials.docblock',['showall'=>true])
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                  <span class="nostyle" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock')">
+                    {{ $m->getName() }}
+                  </span>
+                  @includeWhen($m->isPublic(), 'library.partials.params')
+                  @if (!$m->isPublic())
+                    <span class="badge badge-warning ml-2">Método privado</span>
+                  @endif
+                </div>
+                <div class="docblock_div my-2" style="display:none">
+                  @include('partials.docblock', ['showall' => true])
+                </div>
+              </td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
-</div>
-
+  </div>
 @endsection
 
 @section('javascripts_bottom')
-@parent
-<script>
+  @parent
+  <script>
     $(document).ready(function() {
 
-        oTable = $('.listar-metodos').DataTable({
-            dom: 't'
-            , "paging": false
-            , "sort": true
-            , "order": [
-                [0, "asc"]
-            ]
-        })
+      oTable = $('.listar-metodos').DataTable({
+        dom: 't',
+        "paging": false,
+        "sort": true,
+        "order": [
+          [0, "asc"]
+        ]
+      })
 
-        // Botão para mostrar o docblock
-        $('.docblock_btn').click(function(e) {
-            e.preventDefault()
-            $(this).closest('td').find('.docblock_div').slideToggle()
-        })
+      // Botão para mostrar o docblock
+      $('.docblock_btn').click(function(e) {
+        e.preventDefault()
+        $(this).closest('td').find('.docblock_div').slideToggle()
+      })
 
-        $('[data-toggle="tooltip"]').tooltip({
-            html: true
-            , boundary: 'window'
-        })
+      $('[data-toggle="tooltip"]').tooltip({
+        html: true,
+        boundary: 'window'
+      })
 
     })
-
-</script>
+  </script>
 @endsection

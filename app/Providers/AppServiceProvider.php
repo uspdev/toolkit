@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\Models\Permission;
 
@@ -27,8 +28,13 @@ class AppServiceProvider extends ServiceProvider
     {
         // criando algumas permissões a serem utilizadas pela aplicação
         // e que podem ser atribuídas aos usuários
-        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'grad']);
-        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'posgrad']);
-        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'lattes']);
+        Permission::firstOrCreate(['name' => 'grad']);
+        Permission::firstOrCreate(['name' => 'posgrad']);
+        Permission::firstOrCreate(['name' => 'academica']);
+        Permission::firstOrCreate(['name' => 'financeira']);
+        Permission::firstOrCreate(['name' => 'administrativa']);
+
+        $role = Role::firstOrCreate(['name' => 'diretoria']);
+        $role->givePermissionTo(['academica','financeira','administrativa']);
     }
 }

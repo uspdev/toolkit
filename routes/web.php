@@ -34,3 +34,8 @@ Route::get('library/{library}', [LibraryController::class, 'index']);
 Route::get('library/{library}/{class}', [LibraryController::class, 'methods']);
 Route::match(['get', 'post'], 'library/{library}/{class}/{method}', [LibraryController::class, 'show']);
 
+Route::get('permission', [MainController::Class, 'permission']);
+
+Route::get('gates', function(){
+    dd(Gate::abilities());
+});

@@ -21,7 +21,7 @@ return [
     'permission' => true,
 
     // permite login somente de usuários já cadastrados na base local ou autorizados nos admins, gerentes ou users
-    'onlyLocalUsers' => true,
+    'onlyLocalUsers' => false,
 
     // se true, habilita botão para remover usuário (destroy)
     'destroyUser' => true,

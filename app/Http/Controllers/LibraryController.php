@@ -54,6 +54,7 @@ class LibraryController extends Controller
             'metodo' => $method,
             'data' => $data,
             'paramString' => $paramString,
+            'params' => $params,
             'keys' => $keys,
             'library' => $library,
             'execTime' => number_format($exectime, 3),
@@ -75,26 +76,27 @@ class LibraryController extends Controller
      */
     protected static function params($inputs)
     {
-        //dd($inputs);
         $params = [];
         $paramString = '';
         foreach ($inputs as $v) {
-            if ($v !== null) {
-                $v_array = json_decode($v, true);
-                if (is_numeric($v) || $v === '0') { // é um número, nesse caso sempre inteiro
-                    $paramString .= $v . ', ';
-                    $v = intval($v);
-                } elseif (json_last_error() === JSON_ERROR_NONE) { // é um json valido
-                    $v = $v_array;
-                    //dd($v);
-                    // dd(json_encode(["nomabvset"=>"SET"]));
-                } else {
-                    $paramString .= $v . ', ';
-                }
-                array_push($params, $v);
+            $v_array = json_decode($v, true); //array é passado como json
+            if (is_numeric($v) || $v === '0') { // é um número, nesse caso sempre inteiro
+                $paramString .= 'n_' . $v . ', ';
+                $param = intval($v);
+            } elseif (empty($v) || $v == 'null') { //vazio
+                $paramString .= 'empty, ';
+                $param = null;
+            } elseif (str_starts_with($v, '{') && json_last_error() === JSON_ERROR_NONE) { // é um json valido
+                $paramString .= 'j_' . $v .', ';
+                $param = $v_array;
+            } else { //string normal
+                $paramString .= 's_' . $v . ', ';
+                $param = $v;
             }
+            array_push($params, $param);
         }
         $paramString = substr($paramString, 0, -2);
+        // dd($inputs, $paramString, $params);
         return [$params, $paramString];
     }
 

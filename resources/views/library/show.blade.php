@@ -39,21 +39,22 @@ seria legal juntar e dar include --}}
         <span class="h4">
           <a href="library/{{ $library }}/{{ $class }}">{{ $class }}</a>
           <i class="fas fa-angle-right"></i>
-          <a href="#" class="nostyle" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock', ['m' => $methodReflection])">
+          <span role="button" class="docblock_btn" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock', ['m' => $methodReflection])">
             {{ $metodo }}
-          </a>
-          <button class="badge badge-info badge-pill docblock_btn">doc <i class="fas fa-caret-down"></i></button>
-          ({{ $paramString }})
+          </span>
+          <span role="button" class="badge badge-info docblock_btn">
+            <i class="fa-sm fas fa-book"></i> <i class="fas fa-caret-down"></i>
+          </span>
         </span>
-        @include('library.partials.params', ['m' => $methodReflection])
+        @includeWhen($methodReflection->isPublic(), 'library.partials.params', ['m' => $methodReflection])
       </div>
     </div>
   </div>
-  <div>
-    <div class="docblock my-2" style="display:none">
-      @include('partials.docblock', ['m' => $methodReflection, 'showall' => true])
-    </div>
+
+  <div class="docblock my-2" style="display:none">
+    @include('partials.docblock', ['m' => $methodReflection, 'showall' => true])
   </div>
+
   <div class="card mt-2">
     <div class="card-header h4">
       <div class="form-inline">
@@ -61,6 +62,7 @@ seria legal juntar e dar include --}}
         @includewhen($type == 'multi_array', 'partials.datatable-totalbox')
         @includewhen($type == 'multi_array', 'partials.datatable-filterbox')
         @include('partials.exectime')
+        <small class="ml-3">(Parametros: {{ $paramString }})</small>
       </div>
     </div>
     <div class="card-body">
@@ -88,7 +90,6 @@ seria legal juntar e dar include --}}
 
 @section('javascripts_bottom')
   @parent
-  {{-- @include('partials.params-js') --}}
   <script>
     $(document).ready(function() {
 

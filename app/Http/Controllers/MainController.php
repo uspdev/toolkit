@@ -5,13 +5,41 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Library;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Permission;
 
 class MainController extends Controller
 {
 
     private $baseNamespace = 'Uspdev\\';
+
+    public function permission()
+    {
+        echo 'Global permissions:<br>';
+        $permissions = Permission::all();
+        foreach ($permissions as $p) {
+            echo $p->guard_name . '/' . $p->name . "<br>\n";
+        }
+
+        echo '<br>' . Auth::user()->name . ' permissions:<br>';
+        $userPermissions = Auth::user()->getAllPermissions();
+        foreach ($userPermissions as $p) {
+            echo $p->guard_name . '/' . $p->name . "<br>\n";
+        }
+
+        echo '<br>Gates<br>';
+        $gates = array_keys(Gate::abilities());
+        foreach ($gates as $g) {
+            echo $g . '<br>';
+        }
+
+        echo '<br>auth<br><pre>';
+        echo json_encode(config('auth'), JSON_PRETTY_PRINT);
+
+    }
 
     public function index()
     {

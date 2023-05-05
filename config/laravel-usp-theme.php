@@ -36,8 +36,12 @@ $submenu2 = [
 ];
 $menu = [
     [
-        'text' => '<i class="fas fa-home"></i> Home',
-        'url' => 'home',
+        'text' => 'Permissions',
+        'url' => 'permission',
+    ],
+    [
+        'text' => 'Gates',
+        'url' => 'gates',
     ],
     [
         'key' => 'replicado',

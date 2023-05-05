@@ -55,22 +55,50 @@
     </form>
   </div>
 </div>
-<br>
 
-<h4>
-  Senha de APP Google
-</h4>
-<form method="POST" action="senha-de-app">
-  @csrf
-  E-mail: <input type="email" name="email">
-  Senha: <input type="password" name="senha"><br>
-  Servidor: <input type="text" name="servidor" value="smtp.googlemail.com">
-  Porta: <input type="text" name="porta" value="465">
-  Segurança: <input type="text" name="seguranca" value="ssl"><br>
-  <input type="submit">
-</form>
+<div class="mt-3">
+  <h4>Permissions</h4>
+  <div>
+    Hierarquia:
+    @foreach (App\Models\User::$permissoesHierarquia as $h)
+      @can($h)
+        <b>{{ $h }}</b>
+      @endcan
+    @endforeach
+    <br>
+    Vinculo:
+    @foreach (App\Models\User::$permissoesVinculo as $v)
+      @can('senhaunica.' . strtolower($v))
+        <b>{{ $v }}</b>
+      @endcan
+    @endforeach
+    <br>
+    Quando estiver logado aparecerá as permissions do usuário<br>
+    @if (Auth::user() && Auth::user()->hasPermissionTo('academica'))
+      academica da aplicação via permission
+    @endif
+    <br>
+    @can('academica')
+      academica da aplicação via can
+    @endcan
 
+  </div>
+</div>
 
+<div class="mt-3">
+  <h4>
+    Senha de APP Google
+  </h4>
+  <form method="POST" action="senha-de-app">
+    @csrf
+    E-mail: <input type="email" name="email">
+    Senha: <input type="password" name="senha"><br>
+    Servidor: <input type="text" name="servidor" value="smtp.googlemail.com">
+    Porta: <input type="text" name="porta" value="465">
+    Segurança: <input type="text" name="seguranca" value="ssl"><br>
+    <input type="submit">
+  </form>
+</div>
 @section('javascripts_bottom')
   <script>
     // autosubmit para skin changer

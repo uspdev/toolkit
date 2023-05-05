@@ -9,13 +9,15 @@
     <p>Ela é voltada para desenvolvedores a fim de testar métodos e funcionalidades específicas.</p>
   </div>
   <hr>
-  <div class="row">
-    <div class="col-md-7">
-      @include('partials.esquerda')
+  @can('admin')
+    <div class="row">
+      <div class="col-md-7">
+        @include('partials.esquerda')
+      </div>
+      <div class="col-md-5">
+        @include('partials.direita')
+      </div>
     </div>
-    <div class="col-md-5">
-      @include('partials.direita')
-    </div>
-  </div>
+  @endcan
 
 @endsection

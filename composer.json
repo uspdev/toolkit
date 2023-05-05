@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.2",
         "uspdev/laravel-replicado": "dev-main",
+        "uspdev/replicado": "dev-master",
         "uspdev/laravel-tools": "dev-main",
         "uspdev/laravel-usp-theme": "dev-master",
         "uspdev/senhaunica-socialite": "dev-master",
@@ -34,6 +35,10 @@
         {
             "type": "path",
             "url": "uspdev/laravel-replicado"
+        },
+        {
+            "type": "path",
+            "url": "uspdev/replicado"
         },
         {
             "type": "path",
