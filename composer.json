@@ -1,9 +1,9 @@
 {
     "name": "uspdev/toolkit",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Kit de ferramentas de testes para bibliotecas USPDev",
     "keywords": [
-        "framework",
+        "toolkit",
         "laravel"
     ],
     "license": "MIT",

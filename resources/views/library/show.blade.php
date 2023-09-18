@@ -1,6 +1,6 @@
 @extends('laravel-usp-theme::master')
 
-@section('title', $metodo . ' | ' . $library)
+@section('title', $metodo->methodName . ' | ' . $library)
 
 @section('styles')
   {{-- repetido do methods.blade.php
@@ -40,13 +40,13 @@ seria legal juntar e dar include --}}
           <a href="library/{{ $library }}/{{ $class }}">{{ $class }}</a>
           <i class="fas fa-angle-right"></i>
           <span role="button" class="docblock_btn" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock', ['m' => $methodReflection])">
-            {{ $metodo }}
+            {{ $metodo->methodName }}
           </span>
           <span role="button" class="badge badge-info docblock_btn">
             <i class="fa-sm fas fa-book"></i> <i class="fas fa-caret-down"></i>
           </span>
         </span>
-        @includeWhen($methodReflection->isPublic(), 'library.partials.params', ['m' => $methodReflection])
+        @includeWhen($metodo->isPublic, 'library.partials.params', ['m' => $methodReflection])
       </div>
     </div>
   </div>
@@ -58,7 +58,8 @@ seria legal juntar e dar include --}}
   <div class="card mt-2">
     <div class="card-header h4">
       <div class="form-inline">
-        Resultado @include('partials.tipos')
+        Resultado
+        @include('partials.tipos')
         @includewhen($type == 'multi_array', 'partials.datatable-totalbox')
         @includewhen($type == 'multi_array', 'partials.datatable-filterbox')
         @include('partials.exectime')
