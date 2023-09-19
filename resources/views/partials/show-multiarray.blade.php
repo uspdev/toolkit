@@ -1,4 +1,5 @@
-<table class="table table-stripped table-hover table-bordered resultado-multiarray no-footer">
+<table
+  class="table table-stripped table-hover table-bordered resultado-multiarray dt-buttons dt-fixed-header datatable-simples">
   <thead>
     <tr>
       @foreach ($keys as $key)
@@ -8,7 +9,7 @@
       @endforeach
   </thead>
   <tbody>
-    @foreach ($data as $row)
+    @foreach ($metodo->exec as $row)
       <tr>
         @foreach ($row as $col)
           <td>
@@ -23,25 +24,3 @@
     @endforeach
   </tbody>
 </table>
-
-@section('javascripts_bottom')
-  @parent
-  <script>
-    $(document).ready(function() {
-
-      oTable = $('.resultado-multiarray').DataTable({
-        dom: 'Bt',
-        "paging": false,
-        "sort": true,
-        "order": [
-        //   [100, "asc"]
-        ],
-        buttons: [
-          'excelHtml5', 'csvHtml5'
-        ],
-        responsive: false, // o responsive é habilitado por padrão a partir do theme 3.1.12, nesse caso não queremos isso
-      })
-
-    })
-  </script>
-@endsection

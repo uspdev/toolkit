@@ -1,7 +1,7 @@
 @extends('laravel-usp-theme::master')
 
 @section('title', $metodo->methodName . ' | ' . $library)
-
+@include('laravel-usp-theme::blocos.datatable-simples')
 @section('styles')
   {{-- repetido do methods.blade.php
 seria legal juntar e dar include --}}
@@ -39,7 +39,8 @@ seria legal juntar e dar include --}}
         <span class="h4">
           <a href="library/{{ $library }}/{{ $class }}">{{ $class }}</a>
           <i class="fas fa-angle-right"></i>
-          <span role="button" class="docblock_btn" data-toggle="tooltip" data-placement="top" title="@include('partials.docblock', ['m' => $methodReflection])">
+          <span role="button" class="docblock_btn" data-toggle="tooltip" data-placement="top"
+            title="@include('partials.docblock', ['m' => $methodReflection])">
             {{ $metodo->methodName }}
           </span>
           <span role="button" class="badge badge-info docblock_btn">
@@ -55,38 +56,24 @@ seria legal juntar e dar include --}}
     @include('partials.docblock', ['m' => $methodReflection, 'showall' => true])
   </div>
 
-  <div class="card mt-2">
-    <div class="card-header h4">
-      <div class="form-inline">
-        Resultado
-        @include('partials.tipos')
-        @includewhen($type == 'multi_array', 'partials.datatable-totalbox')
-        @includewhen($type == 'multi_array', 'partials.datatable-filterbox')
-        @include('partials.exectime')
-        <small class="ml-3">(Parametros: {{ $paramString }})</small>
-      </div>
+  @if ($metodo->execError)
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <b>Erro</b>: {{ $metodo->execError }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-    <div class="card-body">
-      @if ($type == 'multi_array')
-        @include('partials.show-multiarray')
-      @endif
-      @if ($type == 'simple_array')
-        @include('partials.show-simplearray')
-      @endif
-      @if ($type == 'string')
-        {{ $data }}
-      @endif
-      @if ($type == 'boolean')
-        Booleano:
-        @if ($data === true)
-          Verdadeiro
-        @endif
-        @if ($data === false)
-          Falso
-        @endif
-      @endif
+  @endif
+
+  @if ($metodo->exec)
+    @include('library.partials.resultado')
+    @else
+    <div class="card">
+        <div class="card-body">
+            Sem resultados | Parametros: {{ $metodo->paramString }}
+        </div>
     </div>
-  </div>
+  @endif
 @endsection
 
 @section('javascripts_bottom')

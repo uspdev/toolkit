@@ -45,13 +45,9 @@ class LibraryController extends Controller
             'library' => $library,
             'class' => $class,
             'metodo' => $metodo,
-            'params' => $metodo->obterParams(),
             'methodReflection' => $metodo->obterReflection(),
-            'data' => $data ?? [],
             'type' => $type ?? '',
             'keys' => $keys ?? [],
-            'paramString' => $metodo->paramString,
-            'execTime' => number_format($metodo->exectime, 3),
         ]);
     }
 

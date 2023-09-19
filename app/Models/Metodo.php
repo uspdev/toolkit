@@ -1,11 +1,19 @@
 <?php
 namespace App\Models;
 
+use TypeError;
+
 class Metodo
 {
 
     public $exectime = 0;
     public $paramString = '';
+
+    /** Mensagem de erro de execução, se houver */
+    public $execError = null;
+
+    /** resultado da execução do método */
+    public $exec = null;
 
     public function __construct($className, $methodName)
     {
@@ -61,6 +69,8 @@ class Metodo
 
     /**
      * Recupera da reflection e retorna os valores default dos parâmetros
+     *
+     * Se não possuir parâmetros, devemos atribuir []
      */
     public function preencherDefaultParams()
     {
@@ -71,17 +81,16 @@ class Metodo
             $params[$p->name] = $p->isDefaultValueAvailable()? $p->getDefaultValue() : '';
             $types[$p->name] = $p->getType() ? $p->getType()->getName() : '';
         }
-        $this->defaultParams = $params;
-        $this->types = $types;
+        $this->defaultParams = $params ?? [];
+        $this->types = $types ?? [];
         return true;
     }
 
     /**
-     * retorna os parâmetros para a view
+     * retorna os parâmetros formatado para a view
      */
     public function obterParams()
     {
-        // dd($this);
         $params = isset($this->params) ? $this->params : $this->defaultParams;
         $ret = [];
         foreach ($params as $k => $p) {
@@ -94,19 +103,25 @@ class Metodo
     }
 
     /**
-     * Executa o método mendindo tempo de execução
+     * Executa o método medindo tempo de execução
      */
     public function exec()
     {
-        // dd($this);
         $className = $this->className;
         $metodo = $this->methodName;
         $params = array_values($this->params);
         $exectime = -microtime(true);
 
-        $exec = $className::$metodo(...$params);
+        try {
+            $exec = $className::$metodo(...$params);
+        } catch (TypeError $e) {
+            // echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+            $this->execError = $e->getMessage();
+            $exec = '';//$e->getMessage();
+        }
         $exectime += microtime(true);
-        $this->exectime = $exectime;
+        $this->exectime = number_format($exectime, 3);
+        $this->exec = $exec;
         return $exec;
     }
 }
