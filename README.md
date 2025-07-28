@@ -2,6 +2,10 @@
 
 Sistema que permite testar algumas biblitecas do USPDev como o **replicado**, **laravel-usp-theme** e **senhaunica-fake**.
 
+## Dependências
+
+* PHP 8.2 pois usa laravel 11
+
 ## Instalação e configuração
 
 Este é um projeto laravel e a configuração é similar a outros projetos que usam o framework.
