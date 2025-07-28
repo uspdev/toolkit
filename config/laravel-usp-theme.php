@@ -109,9 +109,6 @@ return [
     # na versão 1 era dashboard_url
     'app_url' => config('app.url'),
 
-    # container ou container-fluid
-    'container' => 'container-fluid',
-
     # login e logout
     'logout_method' => 'POST',
     'logout_url' => 'logout',
@@ -120,4 +117,10 @@ return [
     # menus
     'menu' => $menu,
     'right_menu' => $right_menu,
+
+    # mensagens flash - https://uspdev.github.io/laravel#31-mensagens-flash
+    'mensagensFlash' => true,
+
+    # container ou container-fluid
+    'container' => 'container-fluid',
 ];

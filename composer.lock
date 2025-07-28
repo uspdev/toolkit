@@ -7011,7 +7011,7 @@
             "dist": {
                 "type": "path",
                 "url": "uspdev/laravel-replicado",
-                "reference": "60f68b0af8f88f89cf325f7bf4ae0836e4b4024b"
+                "reference": "0fcc78f7fae18891a339ab7988697f9c2094c4fd"
             },
             "require": {
                 "uspdev/replicado": "*"
@@ -7179,15 +7179,15 @@
             "dist": {
                 "type": "path",
                 "url": "uspdev/senhaunica-socialite",
-                "reference": "f4db8f92dd26d3c718ae8a8804e10407b2505891"
+                "reference": "88b088418176d0b72ac8baf7d20750ef56ffb27a"
             },
             "require": {
                 "doctrine/dbal": "^3 | ^4",
                 "kyslik/column-sortable": "^6 | ^7",
                 "laravel/socialite": "^5",
-                "php": "^8.2",
-                "socialiteproviders/manager": "^4.0",
-                "spatie/laravel-permission": "^6.0"
+                "php": "^7 | ^8",
+                "socialiteproviders/manager": "^3 | ^4",
+                "spatie/laravel-permission": "^4 | ^5 | ^6"
             },
             "type": "library",
             "extra": {
