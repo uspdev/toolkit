@@ -32,6 +32,7 @@ clone_update "senhaunica-socialite"
 clone_update "utils"
 clone_update "wsfoto"
 clone_update "laravel-replicado"
+clone_update "forms"
 
 echo ""
 echo "Projetos em uspdev/ atualizados !!"
