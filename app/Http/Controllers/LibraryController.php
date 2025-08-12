@@ -9,8 +9,16 @@ use Illuminate\Http\Request;
 
 class LibraryController extends Controller
 {
+
+    /**
+     * Dado uma biblioteca $library, retorna a lista as classes disponíveis
+     * 
+     * @param string $library Nome da biblioteca
+     */
     public static function index($library)
     {
+        \UspTheme::activeUrl('library/' . $library);
+
         $classes = Library::listarClasses($library);
         return view('library.index', [
             'classes' => $classes,
@@ -18,8 +26,16 @@ class LibraryController extends Controller
         ]);
     }
 
+    /**
+     * Dado a biblioteca e a classe, retorna a lista de métodos disponíveis
+     * 
+     * @param string $library Nome da biblioteca
+     * @param string $class Nome da classe
+     */
     public function methods($library, $class)
     {
+        \UspTheme::activeUrl('library/' . $library);
+
         return view('library.methods', [
             'classReflection' => Library::listarMetodos($library, $class),
             'class' => $class,
@@ -27,8 +43,13 @@ class LibraryController extends Controller
         ]);
     }
 
+    /**
+     * Mostra as informações de um método
+     */
     public function show(Request $request, $library, $class, $method)
     {
+        \UspTheme::activeUrl('library/' . $library);
+
         $metodo = new Metodo("Uspdev\\{$library}\\" . $class, $method);
 
         if ($request->isMethod('post')) {

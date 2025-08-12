@@ -39,35 +39,40 @@ $menu = [
         'text' => 'Permissions',
         'url' => 'permission',
     ],
+    // [
+    //     'text' => 'Gates',
+    //     'url' => 'gates',
+    // ],
+    // [
+    //     'key' => 'replicado',
+    // ],
+    // [
+    //     'key' => 'nada',
+    // ],
+    // [
+    //     'text' => 'Drop Down',
+    //     'submenu' => $submenu2,
+    //     'can' => '',
+    // ],
     [
-        'text' => 'Gates',
-        'url' => 'gates',
-    ],
-    [
-        'key' => 'replicado',
-    ],
-    [
-        'key' => 'nada',
-    ],
-    [
-        'text' => 'Drop Down',
-        'submenu' => $submenu2,
-        'can' => '',
-    ],
-    [
-        'text' => 'Está logado',
-        'url' => config('app.url') . '/logado', // com caminho absoluto
-        'can' => 'user',
-    ],
-    [
-        'text' => 'Menu gerente',
-        'url' => 'gerente',
-        'can' => 'gerente',
-    ],
-    [
-        'text' => 'Menu admin',
-        'submenu' => $admin,
+        'text' => 'Replicado',
+        'url' => 'library/Replicado', // com caminho absoluto
         'can' => 'admin',
+    ],
+    [
+        'text' => 'Utils',
+        'url' => 'library/Utils',
+        'can' => 'admin',
+    ],
+    [
+        'text' => 'Foto',
+        'url' => 'Wsfoto/obter',
+        'can' => 'admin',
+    ],
+    [
+        'text' => 'Theme',
+        'url' => 'theme',
+        'can' => '',
     ],
 
 ];
@@ -75,6 +80,9 @@ $menu = [
 $right_menu = [
     [
         'key' => 'theme',
+    ],
+        [
+        'key' => 'uspdev-forms',
     ],
     [
         'key' => 'senhaunica-socialite',

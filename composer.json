@@ -19,7 +19,8 @@
         "uspdev/replicado": "dev-master",
         "uspdev/senhaunica-socialite": "dev-master",
         "uspdev/utils": "dev-master",
-        "uspdev/wsfoto": "dev-master"
+        "uspdev/wsfoto": "dev-master",
+        "uspdev/forms": "dev-main"
     },
     "repositories": [
         {
@@ -45,6 +46,10 @@
         {
             "type": "path",
             "url": "uspdev/utils"
+        },
+        {
+            "type": "path",
+            "url": "uspdev/forms"
         },
         {
             "type": "path",

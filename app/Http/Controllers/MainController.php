@@ -43,29 +43,6 @@ class MainController extends Controller
 
     public function index()
     {
-        $replicado = [
-            [
-                'text' => 'Replicado',
-                'url' => 'replicado',
-                'submenu' => [
-                    [
-                        'text' => 'submenu1',
-                        'url' => 'submenu',
-                    ],
-                    [
-                        'text' => 'submenu2',
-                        'url' => '',
-                    ],
-                ],
-            ],
-            [
-                'text' => 'segundo menu',
-                'url' => '',
-            ],
-        ];
-
-        \UspTheme::activeUrl('replicado');
-        \UspTheme::addMenu('replicado', $replicado);
 
         $classes = [];
         foreach (Library::libs as $library) {
@@ -105,6 +82,8 @@ class MainController extends Controller
 
     public function theme()
     {
+        \UspTheme::activeUrl('theme');
+        
         return view('theme');
     }
 

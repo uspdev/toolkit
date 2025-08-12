@@ -9,6 +9,8 @@ class WsfotoController extends Controller
 {
     public function show(Request $request)
     {
+        \UspTheme::activeUrl('Wsfoto/obter');
+        
         $data = [];
         $paramString = '';
         if ($request->isMethod('post')) {

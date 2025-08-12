@@ -5,6 +5,17 @@
 @section('content')
   <div class="row">
     <div class="col-12">
+      @if(!getenv('WSFOTO_USER'))
+      <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Atenção</h4>
+        <p>O sistema não está configurado para usar o Wsfoto. 
+          Para isso, é necessário definir as variáveis de ambiente 
+          <code>WSFOTO_USER</code>, <code>WSFOTO_PASSWORD</code> e <code>WSFOTO_DISABLE=0</code>.</p>
+        <hr>
+        <p class="mb-0">Consulte a documentação do sistema para mais detalhes.</p>
+        
+      </div>
+      @endif
       <div class="form-inline float-left">
         <span class="h4">Wsfoto
           <i class="fas fa-angle-right"></i> obter({{ $paramString }})</span>
