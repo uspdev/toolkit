@@ -86,5 +86,12 @@ class MainController extends Controller
         
         return view('theme');
     }
+    
+    public function laravelTools()
+    {
+        \UspTheme::activeUrl('laravel-tools');
+
+        return view('laravel-tools');
+    }
 
 }

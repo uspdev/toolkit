@@ -26,6 +26,9 @@ Route::get('/', [MainController::class, 'index']);
 
 Route::get('theme', [MainController::class, 'theme']);
 Route::get('theme-skin-change', [MainController::class, 'themeSkinChange']);
+
+Route::get('laravel-tools', [MainController::class, 'laravelTools']);
+
 Route::post('senha-de-app', [MainController::class, 'senhaDeApp']);
 
 Route::match(['get', 'post'], 'Wsfoto/obter', [WsfotoController::class, 'show']);

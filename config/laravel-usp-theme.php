@@ -74,7 +74,11 @@ $menu = [
         'url' => 'theme',
         'can' => '',
     ],
-
+    [
+        'text' => 'Laravel Tools',
+        'url' => 'laravel-tools',
+        'can' => '',
+    ],
 ];
 
 $right_menu = [
