@@ -79,6 +79,11 @@ $menu = [
         'url' => 'laravel-tools',
         'can' => '',
     ],
+    [
+        'text' => 'Forms',
+        'url' => 'uspdev-forms/definitions',
+        'can' => '',
+    ],
 ];
 
 $right_menu = [

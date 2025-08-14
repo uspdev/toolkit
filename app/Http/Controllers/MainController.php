@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Permission;
+use Uspdev\Forms\Form;
+
 
 class MainController extends Controller
 {
@@ -38,7 +40,6 @@ class MainController extends Controller
 
         echo '<br>auth<br><pre>';
         echo json_encode(config('auth'), JSON_PRETTY_PRINT);
-
     }
 
     public function index()
@@ -83,10 +84,10 @@ class MainController extends Controller
     public function theme()
     {
         \UspTheme::activeUrl('theme');
-        
+
         return view('theme');
     }
-    
+
     public function laravelTools()
     {
         \UspTheme::activeUrl('laravel-tools');

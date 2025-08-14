@@ -24,20 +24,21 @@ Route::get(parse_url(config('app.url'), PHP_URL_PATH), [MainController::class, '
 
 Route::get('/', [MainController::class, 'index']);
 
+Route::match(['get', 'post'], 'Wsfoto/obter', [WsfotoController::class, 'show']);
+
 Route::get('theme', [MainController::class, 'theme']);
 Route::get('theme-skin-change', [MainController::class, 'themeSkinChange']);
 
 Route::get('laravel-tools', [MainController::class, 'laravelTools']);
 
-Route::post('senha-de-app', [MainController::class, 'senhaDeApp']);
-
-Route::match(['get', 'post'], 'Wsfoto/obter', [WsfotoController::class, 'show']);
 
 Route::get('library/{library}', [LibraryController::class, 'index']);
 Route::get('library/{library}/{class}', [LibraryController::class, 'methods']);
 Route::match(['get', 'post'], 'library/{library}/{class}/{method}', [LibraryController::class, 'show']);
 
 Route::get('permission', [MainController::Class, 'permission']);
+
+Route::post('senha-de-app', [MainController::class, 'senhaDeApp']);
 
 Route::get('gates', function(){
     dd(Gate::abilities());
