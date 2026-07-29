@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -31,6 +32,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('teste2', function ($user) {
             return $user;
+        });
+
+        Gate::define('manageApiKeys', function (User $user, User $owner): bool {
+            return $user->is($owner) || $user->level === 'admin';
         });
     }
 }

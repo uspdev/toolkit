@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\ApiKeysController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\WsfotoController;
 use Illuminate\Http\Request;
@@ -30,6 +31,10 @@ Route::get('theme', [MainController::class, 'theme']);
 Route::get('theme-skin-change', [MainController::class, 'themeSkinChange']);
 
 Route::get('laravel-tools', [MainController::class, 'laravelTools']);
+
+Route::get('keys', ApiKeysController::class)
+    ->middleware('auth')
+    ->name('toolkit.api-keys.index');
 
 
 Route::get('library/{library}', [LibraryController::class, 'index']);

@@ -84,13 +84,17 @@ $menu = [
         'url' => 'uspdev-forms/definitions',
         'can' => '',
     ],
+    [
+        'text' => 'Chaves de API',
+        'url' => 'keys',
+    ],
 ];
 
 $right_menu = [
     [
         'key' => 'theme',
     ],
-        [
+    [
         'key' => 'uspdev-forms',
     ],
     [

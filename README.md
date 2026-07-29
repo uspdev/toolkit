@@ -4,7 +4,7 @@ Sistema que permite testar algumas biblitecas do USPDev como o **replicado**, **
 
 ## Dependências
 
-* PHP 8.2 pois usa laravel 11
+* PHP 8.3 pois usa laravel 12
 
 ## Instalação e configuração
 
@@ -36,6 +36,17 @@ O sistema tem uma view com a página de demo do theme.
 ### WSFoto
 
 Permite consultar a foto correspondente.
+
+### API Keys
+
+Gerenciamento de chaves de API vinculadas ao usuário autenticado. A tela de
+gerenciamento fica em `/keys` e utiliza o componente de gerenciamento da biblioteca,
+mas com a interface do Toolkit.
+
+As chaves criadas nessa tela podem consumir `GET /api/toolkit/user`, que retorna
+em JSON os dados do usuário proprietário da chave. A autenticação aceita o
+cabeçalho `Authorization: Bearer SUA_API_KEY` ou o parâmetro
+`?api_key=SUA_API_KEY`; para integrações, prefira o cabeçalho Bearer.
 
 
 ### Senha única / Senha única faker

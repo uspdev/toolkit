@@ -1,0 +1,135 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Toolkit API",
+        "description": "API de integração do Toolkit autenticada por API Key.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://dev12.sti.eesc.usp.br/~lucaslopes/toolkit/public/api",
+            "description": "Instância atual da aplicação"
+        }
+    ],
+    "paths": {
+        "/toolkit/user": {
+            "get": {
+                "tags": [
+                    "API Keys"
+                ],
+                "summary": "Retorna o usuário proprietário da API Key",
+                "description": "A chave precisa possuir a permissão user.read. Autentique por Bearer ou pelo parâmetro api_key.",
+                "operationId": "getCurrentApiKeyOwner",
+                "responses": {
+                    "200": {
+                        "description": "Usuário proprietário da chave",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CurrentUserResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Chave ausente, inválida, expirada ou revogada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "message": "Unauthenticated."
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "A chave não possui a permissão user.read",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    },
+                    {
+                        "apiKeyQuery": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CurrentUserResponse": {
+                "required": [
+                    "data"
+                ],
+                "properties": {
+                    "data": {
+                        "required": [
+                            "id",
+                            "name",
+                            "email"
+                        ],
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": 123
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "Maria Silva"
+                            },
+                            "email": {
+                                "type": "string",
+                                "format": "email",
+                                "example": "maria@usp.br"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "ErrorResponse": {
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Informe somente a API Key; o Swagger UI adiciona o prefixo Bearer.",
+                "bearerFormat": "API Key",
+                "scheme": "bearer"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "description": "Alternativa para testes locais. Evite em produção porque URLs podem aparecer em logs e históricos.",
+                "name": "api_key",
+                "in": "query"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "API Keys",
+            "description": "Operações autenticadas por uma API Key do Toolkit."
+        }
+    ]
+}

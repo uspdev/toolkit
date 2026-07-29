@@ -8,13 +8,14 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.3",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^11",
+        "laravel/framework": "^12.0",
         "laravel/tinker": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.2",
         "uspdev/laravel-replicado": "dev-main",
         "uspdev/laravel-tools": "dev-main",
+        "uspdev/api-keys": "dev-main",
         "uspdev/laravel-usp-theme": "dev-master",
         "uspdev/replicado": "dev-master",
         "uspdev/senhaunica-socialite": "dev-master",
@@ -26,6 +27,10 @@
         {
             "type": "path",
             "url": "uspdev/laravel-tools"
+        },
+        {
+            "type": "path",
+            "url": "uspdev/api-keys"
         },
         {
             "type": "path",
@@ -57,11 +62,12 @@
         }
     ],
     "require-dev": {
-        "spatie/laravel-ignition": "*",
+        "darkaonline/l5-swagger": "^11.1",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
-        "phpunit/phpunit": "^9.3.3"
+        "phpunit/phpunit": "^11.0",
+        "spatie/laravel-ignition": "*"
     },
     "config": {
         "optimize-autoloader": true,

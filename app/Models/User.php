@@ -6,13 +6,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Uspdev\ApiKeys\Traits\HasApiAbilities;
+use Uspdev\ApiKeys\Traits\HasApiKeys;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiAbilities, HasApiKeys, HasFactory, Notifiable;
     use \Spatie\Permission\Traits\HasRoles;
     use \Uspdev\SenhaunicaSocialite\Traits\HasSenhaunica;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -42,4 +44,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /** Define as abilities das API keys usando os níveis da aplicação. */
+    public function abilities(string $role): array
+    {
+        return match ($role) {
+            'user' => ['user.read'],
+            default => [],
+        };
+    }
 }
