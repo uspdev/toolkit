@@ -64,6 +64,9 @@ return [
         'middleware' => [
             'web',
             'auth',
+            // A aplicação valida a permissão-pai antes de emitir directory;
+            // o package conhece os papéis, mas não conhece as permissões locais.
+            App\Http\Middleware\EnsureApiKeyRoleCanBeIssued::class,
         ],
 
         // Ability do Laravel usada para decidir quem pode gerenciar as chaves
