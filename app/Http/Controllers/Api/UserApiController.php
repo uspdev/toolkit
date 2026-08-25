@@ -40,10 +40,10 @@ use Symfony\Component\HttpFoundation\Response;
         ),
     ]
 )]
-class CurrentUserController extends Controller
+class UserApiController extends Controller
 {
     /** Retorna em JSON somente o usuário proprietário da API Key autenticada. */
-    public function __invoke(Request $request): JsonResponse
+    public function current(Request $request): JsonResponse
     {
         // Pega a API Key do request, que foi adicionada pelo middleware de autenticação de API Key.
         /** @var \Uspdev\ApiKeys\Models\ApiKey|null $apiKey */
@@ -63,5 +63,27 @@ class CurrentUserController extends Controller
                 'email' => $user->email,
             ],
         ]);
+    }
+
+    /**
+     * Retorna uma página do diretório público permitido pela API Key.
+     *
+     * O escopo é global deliberadamente concedido pela ability elevada,
+     * permitindo que a API Key leia qualquer usuário do sistema.
+     */
+    public function index(Request $request): JsonResponse
+    {
+        /** @var \Uspdev\ApiKeys\Models\ApiKey|null $apiKey */
+        $apiKey = $request->attributes->get(
+            config('api-keys.middleware.request_attribute', 'apiKey')
+        );
+
+        abort_unless($apiKey?->allows('users.read.any'), Response::HTTP_FORBIDDEN);
+
+        $users = User::query()
+            ->select(['id', 'name', 'email'])
+            ->paginate(15);
+
+        return response()->json($users);
     }
 }

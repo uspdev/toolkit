@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\CurrentUserController;
+use App\Http\Controllers\Api\UserApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +22,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('uspdevApiKeys')->group(function (): void {
     // Retorna os dados do dono da chave, tanto por Bearer token quanto por
     // ?api_key= quando essa opção estiver habilitada na configuração.
-    Route::get('/toolkit/user', CurrentUserController::class)
+    Route::get('/toolkit/user', [UserApiController::class, 'current'])
         ->name('toolkit.api.current-user');
+
+    Route::get('/toolkit/users', [UserApiController::class, 'index'])
+        ->name('toolkit.api.users');
 });
 
 // Route::get('{nameSpace}', [UspdevController::class, 'listarClasses']);
