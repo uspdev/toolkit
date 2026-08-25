@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Toolkit API",
-        "description": "API de integração do Toolkit autenticada por API Key.",
+        "description": "API de integração do Toolkit autenticada por API Key. Papéis disponíveis: personal concede user.read; directory concede user.read e users.read.any somente enquanto o owner possuir a permissão-pai administrativa. Roles do Spatie concedem permissões da aplicação, mas os endpoints autorizam pela ability da API Key. HTTP 401 indica falha de autenticação; HTTP 403 indica uma chave autenticada sem a ability exigida.",
         "version": "1.0.0"
     },
     "servers": [
@@ -18,7 +18,7 @@
                     "API Keys"
                 ],
                 "summary": "Retorna o usuário proprietário da API Key",
-                "description": "A chave precisa possuir a permissão user.read. Autentique por Bearer ou pelo parâmetro api_key.",
+                "description": "A chave precisa possuir a ability user.read, concedida pelos papéis personal ou directory. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.",
                 "operationId": "getCurrentApiKeyOwner",
                 "responses": {
                     "200": {
@@ -45,7 +45,60 @@
                         }
                     },
                     "403": {
-                        "description": "A chave não possui a permissão user.read",
+                        "description": "A chave foi autenticada, mas não possui a ability user.read",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    },
+                    {
+                        "apiKeyQuery": []
+                    }
+                ]
+            }
+        },
+        "/toolkit/users": {
+            "get": {
+                "tags": [
+                    "API Keys"
+                ],
+                "summary": "Lista usuários do diretório",
+                "description": "Retorna uma página de até 15 usuários com somente id, name e email. O acesso é um escopo global deliberadamente concedido pela ability users.read.any, disponível ao papel directory enquanto o owner possuir a permissão-pai administrativa. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.",
+                "operationId": "listApiKeyUsers",
+                "responses": {
+                    "200": {
+                        "description": "Página do diretório de usuários",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DirectoryUsersResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Chave ausente, inválida, expirada ou revogada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "message": "Unauthenticated."
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "A chave foi autenticada, mas não possui users.read.any ou o owner perdeu administrativa",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -98,6 +151,67 @@
                     }
                 },
                 "type": "object"
+            },
+            "DirectoryUser": {
+                "required": [
+                    "id",
+                    "name",
+                    "email"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Maria Silva"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "maria@usp.br"
+                    }
+                },
+                "type": "object"
+            },
+            "DirectoryUsersResponse": {
+                "required": [
+                    "current_page",
+                    "data",
+                    "per_page",
+                    "total"
+                ],
+                "properties": {
+                    "current_page": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DirectoryUser"
+                        },
+                        "maxItems": 15
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "example": 15
+                    },
+                    "total": {
+                        "type": "integer",
+                        "example": 42
+                    }
+                },
+                "type": "object"
+            },
+            "ApiKeyRole": {
+                "description": "personal concede user.read. directory concede user.read e users.read.any enquanto o owner possuir administrativa.",
+                "type": "string",
+                "enum": [
+                    "personal",
+                    "directory"
+                ]
             },
             "ErrorResponse": {
                 "required": [

@@ -43,10 +43,29 @@ Gerenciamento de chaves de API vinculadas ao usuário autenticado. A tela de
 gerenciamento fica em `/keys` e utiliza o componente de gerenciamento da biblioteca,
 mas com a interface do Toolkit.
 
-As chaves criadas nessa tela podem consumir `GET /api/toolkit/user`, que retorna
-em JSON os dados do usuário proprietário da chave. A autenticação aceita o
-cabeçalho `Authorization: Bearer SUA_API_KEY` ou o parâmetro
-`?api_key=SUA_API_KEY`; para integrações, prefira o cabeçalho Bearer.
+As chaves criadas nessa tela podem consumir:
+
+| Papel | Abilities | Permissão-pai | Endpoints |
+| --- | --- | --- | --- |
+| `personal` | `user.read` | nenhuma | `GET /api/toolkit/user` |
+| `directory` | `user.read`, `users.read.any` | `administrativa` | `GET /api/toolkit/user` e `GET /api/toolkit/users` |
+
+`GET /api/toolkit/user` retorna os dados do usuário proprietário da chave.
+`GET /api/toolkit/users` retorna uma lista paginada de 15 usuários, somente com
+`id`, `name` e `email`. O diretório é um escopo global concedido
+deliberadamente pela ability `users.read.any`; ele não representa acesso
+somente ao owner da chave.
+
+Roles do Spatie concedem permissões da aplicação, mas a API decide o acesso
+pelas abilities da API Key. O papel `directory` só mantém
+`users.read.any` enquanto o owner possuir a permissão `administrativa`, que é
+verificada em cada uso.
+
+A autenticação aceita `Authorization: Bearer SUA_API_KEY` ou o parâmetro
+`?api_key=SUA_API_KEY`; para integrações, prefira Bearer, pois chaves em URLs
+podem aparecer em históricos e logs. HTTP `401` indica falha de autenticação
+(chave ausente, inválida, expirada ou revogada); HTTP `403` indica chave válida
+sem a ability exigida ou sem a permissão-pai necessária.
 
 
 ### Senha única / Senha única faker

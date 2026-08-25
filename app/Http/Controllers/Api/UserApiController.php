@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
     path: '/toolkit/user',
     operationId: 'getCurrentApiKeyOwner',
     summary: 'Retorna o usuário proprietário da API Key',
-    description: 'A chave precisa possuir a permissão user.read. Autentique por Bearer ou pelo parâmetro api_key.',
+    description: 'A chave precisa possuir a ability user.read, concedida pelos papéis personal ou directory. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.',
     tags: ['API Keys'],
     security: [
         ['bearerAuth' => []],
@@ -35,7 +35,38 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         new OA\Response(
             response: 403,
-            description: 'A chave não possui a permissão user.read',
+            description: 'A chave foi autenticada, mas não possui a ability user.read',
+            content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+        ),
+    ]
+)]
+#[OA\Get(
+    path: '/toolkit/users',
+    operationId: 'listApiKeyUsers',
+    summary: 'Lista usuários do diretório',
+    description: 'Retorna uma página de até 15 usuários com somente id, name e email. O acesso é um escopo global deliberadamente concedido pela ability users.read.any, disponível ao papel directory enquanto o owner possuir a permissão-pai administrativa. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.',
+    tags: ['API Keys'],
+    security: [
+        ['bearerAuth' => []],
+        ['apiKeyQuery' => []],
+    ],
+    responses: [
+        new OA\Response(
+            response: 200,
+            description: 'Página do diretório de usuários',
+            content: new OA\JsonContent(ref: '#/components/schemas/DirectoryUsersResponse')
+        ),
+        new OA\Response(
+            response: 401,
+            description: 'Chave ausente, inválida, expirada ou revogada',
+            content: new OA\JsonContent(
+                ref: '#/components/schemas/ErrorResponse',
+                example: ['message' => 'Unauthenticated.']
+            )
+        ),
+        new OA\Response(
+            response: 403,
+            description: 'A chave foi autenticada, mas não possui users.read.any ou o owner perdeu administrativa',
             content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
         ),
     ]

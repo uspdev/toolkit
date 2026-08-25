@@ -13,9 +13,30 @@ A documentação inclui somente as rotas de integração autenticadas pelo
 middleware `uspdevApiKeys`. No momento, isso corresponde a:
 
 - `GET /api/toolkit/user`
+- `GET /api/toolkit/users`
 
 As rotas `/api-keys/...` não fazem parte da especificação: elas administram
 chaves via sessão web, CSRF e autorização do usuário, não via API Key.
+
+## Papéis e autorização
+
+As opções disponíveis na tela `/keys` formam a seguinte matriz:
+
+| Papel da API Key | Abilities | Permissão-pai | Endpoints |
+| --- | --- | --- | --- |
+| `personal` | `user.read` | nenhuma | `/api/toolkit/user` |
+| `directory` | `user.read`, `users.read.any` | `administrativa` | `/api/toolkit/user`, `/api/toolkit/users` |
+
+Roles do Spatie concedem permissões da aplicação, mas não autorizam uma rota
+da API diretamente. Cada endpoint consulta a ability da API Key; a ability
+`users.read.any` também depende dinamicamente da permissão `administrativa` do
+owner. O diretório é um escopo global deliberado: ele lista usuários do
+sistema, não somente o owner da chave.
+
+HTTP `401` significa que a autenticação falhou (chave ausente, inválida,
+expirada ou revogada). HTTP `403` significa que a chave foi autenticada, mas
+não possui a ability exigida — inclusive quando `administrativa` foi removida
+depois da emissão da chave.
 
 ## Artefatos e uso
 
@@ -31,7 +52,9 @@ php artisan l5-swagger:generate
 ```
 
 O Swagger UI permite autenticar pelo cabeçalho Bearer ou por `?api_key=`.
-O segundo método foi mantido para testes locais; não deve ser usado em produção.
+Prefira Bearer: chaves em URLs podem aparecer em históricos, logs e ferramentas
+de monitoramento. O segundo método foi mantido somente para testes locais e
+demonstração; não deve ser usado em produção.
 
 A URL-base da API no documento é derivada de `APP_URL` (ou pode ser definida
 explicitamente por `L5_SWAGGER_CONST_HOST`). Dessa forma, instalações em um
