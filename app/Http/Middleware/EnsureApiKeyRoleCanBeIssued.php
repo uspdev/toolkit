@@ -13,7 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
  * O package valida se `role` é um papel configurado e, separadamente, verifica
  * se o usuário autenticado pode gerenciar o owner. Essas duas validações não
  * respondem à regra desta aplicação: uma chave `directory` só pode ser
- * criada ou renovada quando o próprio owner possui `administrativa`
+ * criada ou renovada quando o próprio owner possui `administrativa` ou é
+ * administrador hierárquico (`admin`).
  */
 class EnsureApiKeyRoleCanBeIssued
 {
@@ -22,7 +23,9 @@ class EnsureApiKeyRoleCanBeIssued
      * a permissão administrativa exigida pela aplicação.
      *
      * O package valida se o papel é válido; a aplicação valida se o owner
-     * possui permissão para utilizá-lo.
+     * possui permissão para utilizá-lo. O Gate `admin` é a autoridade comum
+     * para administradores definidos pelo senhaunica-socialite, inclusive os
+     * administradores gerenciados pelo ambiente.
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -37,7 +40,12 @@ class EnsureApiKeyRoleCanBeIssued
 
         $owner = $this->resolveOwner($request);
 
-        if ($owner !== null && method_exists($owner, 'can') && ! $owner->can('administrativa')) {
+        if (
+            $owner !== null
+            && method_exists($owner, 'can')
+            && ! $owner->can('administrativa')
+            && ! $owner->can('admin')
+        ) {
             abort(403);
         }
 

@@ -64,8 +64,9 @@ return [
         'middleware' => [
             'web',
             'auth',
-            // A aplicação valida a permissão-pai antes de emitir directory;
-            // o package conhece os papéis, mas não conhece as permissões locais.
+            // A aplicação valida a permissão-pai ou o Gate admin antes de
+            // emitir directory; o package conhece os papéis, mas não conhece
+            // as permissões locais.
             App\Http\Middleware\EnsureApiKeyRoleCanBeIssued::class,
         ],
 
@@ -86,8 +87,8 @@ return [
 
         // Papel solicitado no momento da emissão. A configuração disponibiliza
         // opções na interface, mas não define acesso sozinha: User::abilities()
-        // resolve as abilities e verifica dinamicamente a permissão
-        // administrativa para directory.
+        // resolve as abilities e verifica dinamicamente a autorização elevada
+        // (`administrativa` ou o Gate hierárquico `admin`) para directory.
         'roles' => [
             'personal' => 'Pessoal',
             'directory' => 'Diretório',

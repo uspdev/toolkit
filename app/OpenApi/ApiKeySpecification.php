@@ -13,7 +13,7 @@ use OpenApi\Attributes as OA;
 #[OA\Info(
     version: '1.0.0',
     title: 'Toolkit API',
-    description: 'API de integração do Toolkit autenticada por API Key. Papéis disponíveis: personal concede user.read; directory concede user.read e users.read.any somente enquanto o owner possuir a permissão-pai administrativa. Roles do Spatie concedem permissões da aplicação, mas os endpoints autorizam pela ability da API Key. HTTP 401 indica falha de autenticação; HTTP 403 indica uma chave autenticada sem a ability exigida.'
+    description: 'API de integração do Toolkit autenticada por API Key. Papéis disponíveis: personal concede user.read; directory concede user.read e users.read.any somente enquanto o owner possuir a permissão-pai administrativa ou o Gate hierárquico admin. Roles do Spatie concedem permissões da aplicação, mas os endpoints autorizam pela ability da API Key. HTTP 401 indica falha de autenticação; HTTP 403 indica uma chave autenticada sem a ability exigida.'
 )]
 /*
  * A constante é preenchida pelo L5 Swagger a partir de APP_URL. Assim a URL
@@ -83,7 +83,7 @@ use OpenApi\Attributes as OA;
     schema: 'ApiKeyRole',
     type: 'string',
     enum: ['personal', 'directory'],
-    description: 'personal concede user.read. directory concede user.read e users.read.any enquanto o owner possuir administrativa.'
+    description: 'personal concede user.read. directory concede user.read e users.read.any enquanto o owner possuir administrativa ou o Gate hierárquico admin.'
 )]
 #[OA\Schema(
     schema: 'ErrorResponse',

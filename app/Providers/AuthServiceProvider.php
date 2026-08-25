@@ -35,7 +35,10 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('manageApiKeys', function (User $user, User $owner): bool {
-            return $user->is($owner) || $user->level === 'admin';
+            // Reutiliza o Gate hierárquico do senhaunica-socialite. Ele é a
+            // fonte de verdade para administradores, inclusive os definidos
+            // por SENHAUNICA_ADMINS, depois que o login aplica as permissões.
+            return $user->is($owner) || $user->can('admin');
         });
     }
 }

@@ -44,7 +44,7 @@ use Symfony\Component\HttpFoundation\Response;
     path: '/toolkit/users',
     operationId: 'listApiKeyUsers',
     summary: 'Lista usuários do diretório',
-    description: 'Retorna uma página de até 15 usuários com somente id, name e email. O acesso é um escopo global deliberadamente concedido pela ability users.read.any, disponível ao papel directory enquanto o owner possuir a permissão-pai administrativa. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.',
+    description: 'Retorna uma página de até 15 usuários com somente id, name e email. O acesso é um escopo global deliberadamente concedido pela ability users.read.any, disponível ao papel directory enquanto o owner possuir a permissão-pai administrativa ou o Gate hierárquico admin. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.',
     tags: ['API Keys'],
     security: [
         ['bearerAuth' => []],
@@ -66,7 +66,7 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         new OA\Response(
             response: 403,
-            description: 'A chave foi autenticada, mas não possui users.read.any ou o owner perdeu administrativa',
+            description: 'A chave foi autenticada, mas não possui users.read.any ou o owner perdeu a autorização elevada',
             content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
         ),
     ]

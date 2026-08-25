@@ -52,18 +52,18 @@ class User extends Authenticatable
      * contrato da API do Toolkit; elas não são permissões cadastradas no
      * Spatie.
      *
-     * A permissão administrativa é consultada a cada uso da chave para que
-     * o papel directory não preserve acesso depois que a permissão for
-     * removida do usuário.
+     * A autorização elevada é consultada a cada uso da chave para que o papel
+     * directory não preserve acesso depois que `administrativa` for removida
+     * ou o usuário deixar de ser administrador hierárquico.
      *
      * @return list<string>
      */
     public function abilities(string $role): array
     {
-        // Se o papel for directory, verifica se o usuário ainda tem a permissão administrativa
+        // O papel directory exige a permissão da aplicação ou o Gate admin.
         return match ($role) {
             'personal' => ['user.read'],
-            'directory' => $this->can('administrativa')
+            'directory' => ($this->can('administrativa') || $this->can('admin'))
                 ? ['user.read', 'users.read.any']
                 : [],
             default => [],

@@ -48,7 +48,7 @@ As chaves criadas nessa tela podem consumir:
 | Papel | Abilities | Permissão-pai | Endpoints |
 | --- | --- | --- | --- |
 | `personal` | `user.read` | nenhuma | `GET /api/toolkit/user` |
-| `directory` | `user.read`, `users.read.any` | `administrativa` | `GET /api/toolkit/user` e `GET /api/toolkit/users` |
+| `directory` | `user.read`, `users.read.any` | `administrativa` ou Gate `admin` | `GET /api/toolkit/user` e `GET /api/toolkit/users` |
 
 `GET /api/toolkit/user` retorna os dados do usuário proprietário da chave.
 `GET /api/toolkit/users` retorna uma lista paginada de 15 usuários, somente com
@@ -58,8 +58,8 @@ somente ao owner da chave.
 
 Roles do Spatie concedem permissões da aplicação, mas a API decide o acesso
 pelas abilities da API Key. O papel `directory` só mantém
-`users.read.any` enquanto o owner possuir a permissão `administrativa`, que é
-verificada em cada uso.
+`users.read.any` enquanto o owner possuir a permissão `administrativa` ou o Gate
+hierárquico `admin`, verificados em cada uso.
 
 A autenticação aceita `Authorization: Bearer SUA_API_KEY` ou o parâmetro
 `?api_key=SUA_API_KEY`; para integrações, prefira Bearer, pois chaves em URLs
