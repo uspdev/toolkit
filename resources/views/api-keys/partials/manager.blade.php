@@ -1,5 +1,15 @@
 <section class="card">
   <div class="card-body">
+    {{-- Não apareceu a msg do laravel usp theme --}}
+    @if (session('api-keys.error'))
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('api-keys.error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @endif
+
     @if (!$canIssueDirectory)
       <div class="alert alert-info" role="status">
         <strong>Role Diretório:</strong> disponível somente para usuários com a

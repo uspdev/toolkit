@@ -46,7 +46,14 @@ class EnsureApiKeyRoleCanBeIssued
             && ! $owner->can('administrativa')
             && ! $owner->can('admin')
         ) {
-            abort(403);
+            $message = 'Você não pode criar uma API Key com a role Diretório. ' .
+                'Essa role exige a permissão administrativa.';
+
+            if ($request->expectsJson()) {
+                return response()->json(['message' => $message], 403);
+            }
+
+            return redirect()->back()->with('api-keys.error', $message);
         }
 
         return $next($request);
