@@ -43,6 +43,9 @@ Gerenciamento de chaves de API vinculadas ao usuário autenticado. A tela de
 gerenciamento fica em `/keys` e utiliza o componente de gerenciamento da biblioteca,
 mas com a interface do Toolkit.
 
+Veja a [documentação detalhada de API Keys](docs/api-keys.md) para a configuração,
+emissão, autenticação e autorização das chaves.
+
 As chaves criadas nessa tela podem consumir:
 
 | Papel | Abilities | Permissão-pai | Endpoints |
