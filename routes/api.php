@@ -19,15 +19,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('uspdevApiKeys')->group(function (): void {
-    // Retorna os dados do dono da chave, tanto por Bearer token quanto por
-    // ?api_key= quando essa opção estiver habilitada na configuração.
-    Route::get('/toolkit/user', [UserApiController::class, 'current'])
-        ->name('toolkit.api.current-user');
+// Retorna os dados do dono da chave, tanto por Bearer token quanto por
+// ?api_key= quando essa opção estiver habilitada na configuração.
+Route::middleware('uspdevApiKeys:user.read')
+    ->get('/toolkit/user', [UserApiController::class, 'current'])
+    ->name('toolkit.api.current-user');
 
-    Route::get('/toolkit/users', [UserApiController::class, 'index'])
-        ->name('toolkit.api.users');
-});
+Route::middleware('uspdevApiKeys:users.read.any')
+    ->get('/toolkit/users', [UserApiController::class, 'index'])
+    ->name('toolkit.api.users');
 
 // Route::get('{nameSpace}', [UspdevController::class, 'listarClasses']);
 // Route::get('{nameSpace}/{classe}', [UspdevController::class, 'listarMetodos']);

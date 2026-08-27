@@ -318,23 +318,25 @@ forjados também são bloqueados.
 ## Autenticação das APIs
 
 As APIs de negócio estão em
-[`routes/api.php`](../routes/api.php), no grupo com o middleware
-`uspdevApiKeys`:
+[`routes/api.php`](../routes/api.php), cada uma com o middleware
+`uspdevApiKeys` e a ability que ela exige:
 
 ```php
-Route::middleware('uspdevApiKeys')->group(function (): void {
-    Route::get('/toolkit/user', [UserApiController::class, 'current'])
-        ->name('toolkit.api.current-user');
+Route::middleware('uspdevApiKeys:user.read')
+    ->get('/toolkit/user', [UserApiController::class, 'current'])
+    ->name('toolkit.api.current-user');
 
-    Route::get('/toolkit/users', [UserApiController::class, 'index'])
-        ->name('toolkit.api.users');
-});
+Route::middleware('uspdevApiKeys:users.read.any')
+    ->get('/toolkit/users', [UserApiController::class, 'index'])
+    ->name('toolkit.api.users');
 ```
 
 O alias `uspdevApiKeys` é registrado pelo service provider do pacote a partir
 da chave `api-keys.middleware.alias` da configuração. O middleware executa
-antes dos controllers e encerra a requisição com `401` se a credencial não for
-autenticada.
+antes dos controllers: autentica a credencial, adiciona a chave ao request e
+autoriza a ability declarada na rota. Ele encerra a requisição com `401` se a
+credencial não for autenticada e com `403` se a chave autenticada não possuir
+a ability exigida.
 
 O middleware extrai primeiro `Authorization: Bearer <API_KEY>`. Se não houver
 Bearer e `api-keys.query_parameter.enabled` estiver habilitado, tenta
@@ -367,11 +369,11 @@ $apiKey = $request->attributes->get(
 );
 ```
 
-A autorização e a resposta de `/user` são implementadas assim:
+A invariante e a resposta de `/user` são implementadas assim; a ability
+`user.read` já foi autorizada pelo middleware:
 
 ```php
 abort_unless($apiKey?->owner instanceof User, Response::HTTP_FORBIDDEN);
-abort_unless($apiKey->allows('user.read'), Response::HTTP_FORBIDDEN);
 
 return response()->json([
     'data' => [
@@ -382,12 +384,10 @@ return response()->json([
 ]);
 ```
 
-Para `/users`, a ability é diferente e a query seleciona explicitamente os
-três campos que podem ser expostos:
+Para `/users`, o middleware já autorizou `users.read.any`; a query seleciona
+explicitamente os três campos que podem ser expostos:
 
 ```php
-abort_unless($apiKey?->allows('users.read.any'), Response::HTTP_FORBIDDEN);
-
 $users = User::query()
     ->select(['id', 'name', 'email'])
     ->paginate(15);
@@ -428,7 +428,8 @@ A resposta de `/user` tem esta forma:
 
 Sem chave, com chave malformada, inválida, expirada ou revogada, o middleware
 retorna `401`. Com chave autenticada, mas sem a ability exigida — inclusive se
-o owner perdeu a autorização de `directory` — o controller retorna `403`.
+o owner perdeu a autorização de `directory` — o middleware retorna `403` antes
+de executar o controller.
 
 ## Documentação OpenAPI
 

@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
     path: '/toolkit/user',
     operationId: 'getCurrentApiKeyOwner',
     summary: 'Retorna o usuário proprietário da API Key',
-    description: 'A chave precisa possuir a ability user.read, concedida pelos papéis personal ou directory. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.',
+    description: 'O middleware exige a ability user.read, concedida pelos papéis personal ou directory, antes de executar o controller. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.',
     tags: ['API Keys'],
     security: [
         ['bearerAuth' => []],
@@ -44,7 +44,7 @@ use Symfony\Component\HttpFoundation\Response;
     path: '/toolkit/users',
     operationId: 'listApiKeyUsers',
     summary: 'Lista usuários do diretório',
-    description: 'Retorna uma página de até 15 usuários com somente id, name e email. O acesso é um escopo global deliberadamente concedido pela ability users.read.any, disponível ao papel directory enquanto o owner possuir a permissão-pai administrativa ou o Gate hierárquico admin. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.',
+    description: 'O middleware exige a ability users.read.any antes de executar o controller. O endpoint retorna uma página de até 15 usuários com somente id, name e email; esse escopo global é concedido ao papel directory enquanto o owner possuir a permissão-pai administrativa ou o Gate hierárquico admin. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.',
     tags: ['API Keys'],
     security: [
         ['bearerAuth' => []],
@@ -82,8 +82,10 @@ class UserApiController extends Controller
             config('api-keys.middleware.request_attribute', 'apiKey')
         );
 
+        // Apenas valida se a API Key estiver associada a um usuário;
+        // A ability user.read já foi autorizada pelo middleware da rota; aqui
+        // só preservamos a invariante de que a API Key pertence a um usuário.
         abort_unless($apiKey?->owner instanceof User, Response::HTTP_FORBIDDEN);
-        abort_unless($apiKey->allows('user.read'), Response::HTTP_FORBIDDEN);
 
         $user = $apiKey->owner;
 
@@ -102,15 +104,8 @@ class UserApiController extends Controller
      * O escopo é global deliberadamente concedido pela ability elevada,
      * permitindo que a API Key leia qualquer usuário do sistema.
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        /** @var \Uspdev\ApiKeys\Models\ApiKey|null $apiKey */
-        $apiKey = $request->attributes->get(
-            config('api-keys.middleware.request_attribute', 'apiKey')
-        );
-
-        abort_unless($apiKey?->allows('users.read.any'), Response::HTTP_FORBIDDEN);
-
         $users = User::query()
             ->select(['id', 'name', 'email'])
             ->paginate(15);

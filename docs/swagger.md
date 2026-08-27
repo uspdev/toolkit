@@ -28,15 +28,16 @@ As opções disponíveis na tela `/keys` formam a seguinte matriz:
 | `directory` | `user.read`, `users.read.any` | `administrativa` ou Gate `admin` | `/api/toolkit/user`, `/api/toolkit/users` |
 
 Roles do Spatie concedem permissões da aplicação, mas não autorizam uma rota
-da API diretamente. Cada endpoint consulta a ability da API Key; a ability
-`users.read.any` também depende dinamicamente da permissão `administrativa` ou
-do Gate hierárquico `admin` do owner. O diretório é um escopo global deliberado: ele lista usuários do
-sistema, não somente o owner da chave.
+da API diretamente. O middleware de cada endpoint consulta a ability declarada
+na rota antes de executar o controller; a ability `users.read.any` também
+depende dinamicamente da permissão `administrativa` ou do Gate hierárquico
+`admin` do owner. O diretório é um escopo global deliberado: ele lista usuários
+do sistema, não somente o owner da chave.
 
 HTTP `401` significa que a autenticação falhou (chave ausente, inválida,
 expirada ou revogada). HTTP `403` significa que a chave foi autenticada, mas
-não possui a ability exigida — inclusive quando a autorização elevada foi
-removida depois da emissão da chave.
+o middleware identificou que ela não possui a ability exigida — inclusive
+quando a autorização elevada foi removida depois da emissão da chave.
 
 ## Artefatos e uso
 

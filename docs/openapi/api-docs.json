@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Toolkit API",
-        "description": "API de integração do Toolkit autenticada por API Key. Papéis disponíveis: personal concede user.read; directory concede user.read e users.read.any somente enquanto o owner possuir a permissão-pai administrativa. Roles do Spatie concedem permissões da aplicação, mas os endpoints autorizam pela ability da API Key. HTTP 401 indica falha de autenticação; HTTP 403 indica uma chave autenticada sem a ability exigida.",
+        "description": "API de integração do Toolkit autenticada por API Key. Papéis disponíveis: personal concede user.read; directory concede user.read e users.read.any somente enquanto o owner possuir a permissão-pai administrativa ou o Gate hierárquico admin. Roles do Spatie concedem permissões da aplicação, mas o middleware de cada endpoint autoriza pela ability da API Key antes de executar o controller. HTTP 401 indica falha de autenticação; HTTP 403 indica uma chave autenticada sem a ability exigida.",
         "version": "1.0.0"
     },
     "servers": [
@@ -18,7 +18,7 @@
                     "API Keys"
                 ],
                 "summary": "Retorna o usuário proprietário da API Key",
-                "description": "A chave precisa possuir a ability user.read, concedida pelos papéis personal ou directory. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.",
+                "description": "O middleware exige a ability user.read, concedida pelos papéis personal ou directory, antes de executar o controller. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.",
                 "operationId": "getCurrentApiKeyOwner",
                 "responses": {
                     "200": {
@@ -71,7 +71,7 @@
                     "API Keys"
                 ],
                 "summary": "Lista usuários do diretório",
-                "description": "Retorna uma página de até 15 usuários com somente id, name e email. O acesso é um escopo global deliberadamente concedido pela ability users.read.any, disponível ao papel directory enquanto o owner possuir a permissão-pai administrativa. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.",
+                "description": "O middleware exige a ability users.read.any antes de executar o controller. O endpoint retorna uma página de até 15 usuários com somente id, name e email; esse escopo global é concedido ao papel directory enquanto o owner possuir a permissão-pai administrativa ou o Gate hierárquico admin. Autentique preferencialmente por Bearer; api_key é um fallback de demonstração.",
                 "operationId": "listApiKeyUsers",
                 "responses": {
                     "200": {
@@ -98,7 +98,7 @@
                         }
                     },
                     "403": {
-                        "description": "A chave foi autenticada, mas não possui users.read.any ou o owner perdeu administrativa",
+                        "description": "A chave foi autenticada, mas não possui users.read.any ou o owner perdeu a autorização elevada",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -206,7 +206,7 @@
                 "type": "object"
             },
             "ApiKeyRole": {
-                "description": "personal concede user.read. directory concede user.read e users.read.any enquanto o owner possuir administrativa.",
+                "description": "personal concede user.read. directory concede user.read e users.read.any enquanto o owner possuir administrativa ou o Gate hierárquico admin.",
                 "type": "string",
                 "enum": [
                     "personal",
