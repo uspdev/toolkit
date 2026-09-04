@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ApiKeysController;
+use App\Http\Controllers\CadastrosAuxiliaresController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\WsfotoController;
 use Illuminate\Http\Request;
@@ -26,6 +27,12 @@ Route::get(parse_url(config('app.url'), PHP_URL_PATH), [MainController::class, '
 Route::get('/', [MainController::class, 'index']);
 
 Route::match(['get', 'post'], 'Wsfoto/obter', [WsfotoController::class, 'show']);
+
+Route::get('cadastros-auxiliares/cursos-graduacao', [CadastrosAuxiliaresController::class, 'cursosGraduacao'])
+    ->name('cadastros-auxiliares.cursos-graduacao');
+Route::get('cadastros-auxiliares/cursos-graduacao/{codcur}', [CadastrosAuxiliaresController::class, 'cursoGraduacao'])
+    ->whereNumber('codcur')
+    ->name('cadastros-auxiliares.curso-graduacao');
 
 Route::get('theme', [MainController::class, 'theme']);
 Route::get('theme-skin-change', [MainController::class, 'themeSkinChange']);
