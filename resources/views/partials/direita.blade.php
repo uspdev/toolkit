@@ -5,6 +5,13 @@
   </li>
 </ul>
 
+<h4>Cadastros auxiliares</h4>
+<ul>
+  <li>
+    <a href="cadastros-auxiliares/cursos-graduacao">Cursos de graduação</a>
+  </li>
+</ul>
+
 @foreach (\App\Models\Library::libs as $library)
   <h4>{{ $library }} </h4>
   <ul>
@@ -16,4 +23,3 @@
     @endforeach
   </ul>
 @endforeach
-

@@ -70,6 +70,11 @@ $menu = [
         'can' => 'admin',
     ],
     [
+        'text' => 'Cadastros auxiliares',
+        'url' => 'cadastros-auxiliares/cursos-graduacao',
+        'can' => 'admin',
+    ],
+    [
         'text' => 'Theme',
         'url' => 'theme',
         'can' => '',
