@@ -35,6 +35,7 @@ clone_update "laravel-replicado"
 clone_update "forms"
 clone_update "workflow"
 clone_update "api-keys"
+clone_update "cadastros-auxiliares-client"
 
 echo ""
 echo "Projetos em uspdev/ atualizados !!"

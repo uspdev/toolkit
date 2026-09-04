@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "155aab687154634405ee5a170679845e",
+    "content-hash": "d0ec2a9d13e808cade40004f6a1ce962",
     "packages": [
         {
             "name": "brick/math",
@@ -7594,22 +7594,16 @@
         },
         {
             "name": "uspdev/cadastros-auxiliares-client",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/uspdev/cadastros-auxiliares-client.git",
-                "reference": "a809913f1f484306c9219056b2aa31c19a711ece"
-            },
+            "version": "1.0.4",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/cadastros-auxiliares-client/zipball/a809913f1f484306c9219056b2aa31c19a711ece",
-                "reference": "a809913f1f484306c9219056b2aa31c19a711ece",
-                "shasum": ""
+                "type": "path",
+                "url": "uspdev/cadastros-auxiliares-client",
+                "reference": "28e27a8238496cac3a181864dff11b59e55f5a8d"
             },
             "require": {
-                "illuminate/cache": "^11.0|^12.0",
-                "illuminate/http": "^11.0|^12.0",
-                "illuminate/support": "^11.0|^12.0",
+                "illuminate/cache": "^11.0|^12.0|^13.0",
+                "illuminate/http": "^11.0|^12.0|^13.0",
+                "illuminate/support": "^11.0|^12.0|^13.0",
                 "php": "^8.2"
             },
             "type": "library",
@@ -7625,16 +7619,13 @@
                     "Uspdev\\CadastrosAuxiliaresClient\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Laravel client for cadastros-auxiliares webservice endpoints",
-            "support": {
-                "issues": "https://github.com/uspdev/cadastros-auxiliares-client/issues",
-                "source": "https://github.com/uspdev/cadastros-auxiliares-client/tree/1.0.3"
-            },
-            "time": "2026-04-02T19:55:48+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "uspdev/forms",

@@ -16,6 +16,7 @@
         "uspdev/laravel-replicado": "dev-main",
         "uspdev/laravel-tools": "dev-main",
         "uspdev/api-keys": "dev-main",
+        "uspdev/cadastros-auxiliares-client": "^1.0",
         "uspdev/laravel-usp-theme": "dev-master",
         "uspdev/replicado": "dev-master",
         "uspdev/senhaunica-socialite": "dev-master",
@@ -31,6 +32,15 @@
         {
             "type": "path",
             "url": "uspdev/api-keys"
+        },
+        {
+            "type": "path",
+            "url": "uspdev/cadastros-auxiliares-client",
+            "options": {
+                "versions": {
+                    "uspdev/cadastros-auxiliares-client": "1.0.4"
+                }
+            }
         },
         {
             "type": "path",
